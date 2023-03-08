@@ -4,6 +4,7 @@ import { Navbar } from './Components/Navbar';
 import {Routes, Route} from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
+import CreateAccount from "./CreateAccount";
 
 function App() {
     return (
@@ -11,6 +12,8 @@ function App() {
         <Routes>
             <Route path={"/"} element ={<Home/>} />
             <Route path={"/login"} element ={<Login/>} />
+            <Route path={"/create-account"} element ={<CreateAccount/>} />
+
 
         </Routes>
 

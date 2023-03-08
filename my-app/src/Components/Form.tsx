@@ -23,6 +23,7 @@ export default function Form() {
                     <input
                         className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'
                         placeholder='Enter your password'
+                        type='password'
                     />
                 </div>
                 <div className='mt-8 flex justify-between items-center'>
@@ -35,9 +36,14 @@ export default function Form() {
                     </div>
                     <button   className='text-blue-500'>Forgot password</button>
                 </div>
+
                 <div className='mt-8 flex flex-col gap-y-4'>
                     <motion.button whileHover={{scale: 1.02}} whileTap={{scale: 0.99}} className='py-4 bg-blue-500 rounded-xl text-white text-lg font-bold'>Sign In</motion.button>
                 </div>
+
+
+
+
             </div>
         </div>
 
