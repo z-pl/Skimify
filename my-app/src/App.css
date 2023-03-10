@@ -1,7 +1,128 @@
 .App {
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.wrapper {
+  position: relative;
+  text-align: center;
+}
+.wrapper .button {
+  color: #262626;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 60px;
+  letter-spacing: 8px;
+}
+.wrapper .top {
+  position: absolute;
+  top: 0px;
+  height: 2px;
+  margin: auto;
+  animation: borderTop 0.7s linear;
+  left: 0;
+  width: 100%;
+  opacity: 1;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes borderTop {
+  from {
+    left: 50%;
+    width: 0;
+    opacity: 0;
+  }
+
+  to {
+    left: 0;
+    width: 100%;
+    opacity: 1;
+
+  }
+}
+
+.wrapper .left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0%;
+  margin: auto;
+  animation: borderLeftRight 1.3s linear 0.7s;
+  animation-fill-mode: forwards;
+
+}
+
+.wrapper .right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 0%;
+  margin: auto;
+  animation: borderLeftRight 1.3s linear 0.7s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes borderLeftRight {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes borderBottomLeft{
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+
+  }
+}
+
+@keyframes borderBottomRight{
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+
+  }
+}
+.wrapper .bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  margin: auto;
+  animation: borderBottomLeft 1.3s linear 2s;
+  animation-fill-mode: forwards;
+
+
+}
+.wrapper .bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0%;
+  height: 2px;
+  margin: auto;
+  animation: borderBottomRight 1.3s linear 2s;
+  animation-fill-mode: forwards;
+}
+
+.bOut {
+  border-color: red;
 }
