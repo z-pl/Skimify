@@ -17,15 +17,15 @@ export function LandingHeader() {
   return (
     <div className="p-2 h-screen flex flex-col items-center gap-6">
       <div className="text-7xl break-words font-bold text-gray-700 w-6/12 text-center">
-        Simplify your{' '}
+        Simplify your {'  '}
         {
           <Typewriter
-            words={['lecture notes', 'and videos', 'lecture notes and videos']}
+            words={[' lecture notes', 'videos', 'lecture notes and videos.']}
             loop={1}
             cursor
             cursorStyle='_'
             typeSpeed={100}
-            deleteSpeed={70}
+            deleteSpeed={50}
             delaySpeed={1000}
             />
         }
