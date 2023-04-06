@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Typewriter } from 'react-simple-typewriter'
+import SkimifyTool from "./SkimifyTool";
 
 export function LandingHeader() {
 
@@ -34,21 +35,6 @@ export function LandingHeader() {
       <div className="text-2xl w-4/12 text-center text-gray-600">
         Skimify is an AI tool that enables students to summarize their lecture videos and notes.
       </div>
-
-      <button onClick={toggleSkimifyTool} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border rounded shadow">
-        Skim It
-      </button>
-
-      {showSkimifyTool &&
-        <div className="wrapper w-9/12 h-full">
-          <div className="button">TEXT</div>
-          <div className="bOut border top"></div>
-          <div className="bOut border left"></div>
-          <div className="bOut border right"></div>
-          <div className="bOut border bottom-left"></div>
-          <div className="bOut border bottom-right"></div>
-      </div>
-      }
     </div>
 
   )
