@@ -13,7 +13,6 @@ export default function CreateForm() {
         <div className='mt-10'>
 
             <div>
-
             <label className='text-lg font-medium'>Email</label>
                     <input
                         className='w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent'

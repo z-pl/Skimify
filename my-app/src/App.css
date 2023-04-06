@@ -126,3 +126,127 @@
 .bOut {
   border-color: red;
 }
+
+.add-icon {
+  animation: reverseAdd 0.4s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.add-folder-btn:hover .add-icon {
+  animation: rotateAdd 0.4s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes rotateAdd {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 180deg;
+  }
+}
+
+@keyframes reverseAdd {
+  from {
+    rotate: 180deg;
+  }
+
+  to {
+    rotate: 90deg;
+  }
+}
+
+.caretDown {
+  animation: caretGoDown 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+
+}
+
+.caretRight {
+  animation: caretGoRight 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes caretGoDown {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 90deg;
+  }
+}
+
+@keyframes caretGoRight {
+  from {
+    rotate: 90deg;
+  }
+
+  to {
+    rotate: 0deg;
+  }
+}
+
+
+
+.open-folder {
+  opacity:0.5;
+  animation: morphIn 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.close-folder {
+
+}
+
+@keyframes morphIn {
+
+  from {
+    opacity: 0.5;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+.folder-item {
+  transition: all .2s ease-in-out;
+}
+
+
+
+@keyframes folderZoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.2);
+  }
+}
+
+.document-item {
+}
+
+@keyframes documentAppear {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+.open-docs {
+
+
+}
+
+.close-docs {
+}
