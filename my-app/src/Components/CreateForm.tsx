@@ -54,7 +54,7 @@ export default function CreateForm() {
 
 
         <div className='mt-8 flex flex-col gap-y-4'>
-                    <motion.button whileHover={{scale: 1.02}} whileTap={{scale: 0.99}} className='py-4 bg-blue-500 rounded-xl text-white text-lg font-bold' >
+                    <motion.button whileHover={{scale: 1.02}} whileTap={{scale: 0.99}} className='py-3 bg-blue-500 rounded-xl text-white text-lg font-bold' >
                     <Link to={"/login"}>Create Account</Link>
                     </motion.button>
                 </div>
