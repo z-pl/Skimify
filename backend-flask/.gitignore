@@ -50,6 +50,7 @@ build/
 .idea/
 docs/_build/
 .vscode
+instance/
 
 # Coverage reports
 htmlcov/
