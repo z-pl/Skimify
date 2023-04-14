@@ -1,12 +1,15 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_smorest import Api
-
 from db import db
-
 from resources.user import blp as UserBlueprint
-
+from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
+from datetime import timedelta
+from cache import cache
 
 def create_app(db_url=None):
+
+    ACCESS_EXPIRES = timedelta(hours=1)
 
     app = Flask(__name__)
     app.config["PROPAGATE_EXCEPTIONS"] = True
@@ -19,13 +22,50 @@ def create_app(db_url=None):
     app.config["PROPAGATE_EXCEPTIONS"] = True
 
     db.init_app(app)
-
+    migrate = Migrate(app, db)
     api = Api(app)
 
-    with app.app_context():
-        db.create_all()
+    app.config["JWT_SECRET_KEY"] = "sfdsdfsdfsgdnfen" # MUST CHANGE LATER TESTING PURPOSES
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES
 
+    jwt = JWTManager(app)
+
+    @jwt.token_in_blocklist_loader
+    def check_if_token_is_revoked(jwt_header, jwt_payload):
+        jti = jwt_payload["jti"]
+        token_in_redis = cache.get(jti)
+
+        return token_in_redis is not None
+
+    @jwt.expired_token_loader
+    def expired_token_callback(jwt_header, jwt_payload):
+        return (
+            jsonify(
+                {"message": "Token has expired", "error": "token_expired"}
+            ),
+            401,
+        )
+
+    @jwt.invalid_token_loader
+    def invalid_token_callback(error):
+        return (
+            jsonify(
+                {"message": "Signature verification failed", "error": "invalid_token"}
+            ),
+            401,
+        )
+
+    @jwt.unauthorized_loader
+    def missing_token_callback(error):
+        return (
+            jsonify(
+                {"description": "Request does not contain an access token", "error": "authorization_expired"}
+            ),
+            401,
+        )
 
     # Register Blueprints here
     api.register_blueprint(UserBlueprint)
+
+
     return app

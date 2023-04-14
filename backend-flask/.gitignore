@@ -1,0 +1,72 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+
+@z-pl
+pallets
+/
+flask
+Public
+Fork your own copy of pallets/flask
+Code
+Issues
+3
+Pull requests
+1
+Discussions
+Actions
+Security
+Insights
+flask/.gitignore
+@davidism
+davidism remove references to mailing list
+Latest commit 2381044 on May 11, 2022
+ History
+ 4 contributors
+@mitsuhiko@davidism@greyli@redian
+25 lines (24 sloc)  207 Bytes
+
+
+.DS_Store
+.env
+.flaskenv
+*.pyc
+*.pyo
+env/
+venv/
+.venv/
+env*
+dist/
+build/
+*.egg
+*.egg-info/
+.tox/
+.cache/
+.pytest_cache/
+.idea/
+docs/_build/
+.vscode
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+*,cover
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
