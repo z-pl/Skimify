@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { Cursor, Typewriter } from "react-simple-typewriter";
+import { useState, useEffect } from "react";
+import "../modal.css";
+
+
 
 export function VideoAndDrag() {
 
@@ -12,6 +14,22 @@ export function VideoAndDrag() {
   const [inputValue, setInputValue] = useState("");
 
   const maxLengthValue = 500;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+
+  // Add the handleSummarizeButtonClick function
+  function handleSummarizeButtonClick() {
+    // Add your summarization logic here
+    console.log("Summarize button clicked");
+
+    // Set the modal content with the text from the textarea
+    setModalContent(inputValue);
+
+    // Open the modal
+    setIsModalOpen(true);
+  }
+
 
   function onDragOver(event: any) {
     event.preventDefault();
@@ -29,6 +47,53 @@ export function VideoAndDrag() {
     }
   }
 
+
+  function Modal({ isOpen, content, onClose }) {
+    const [isClosing, setIsClosing] = useState(false);
+  
+    useEffect(() => {
+      if (isOpen) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
+  
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }, [isOpen]);
+  
+    function handleClose() {
+      setIsClosing(true);
+      setTimeout(() => {
+        setIsClosing(false);
+        onClose();
+      }, 400);
+    }
+  
+    if (!isOpen) {
+      return null;
+    }
+  
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div
+          className={`fixed inset-0 bg-black opacity-75 z-10 ${isClosing ? "animate-opacity-out" : ""}`}
+          onClick={handleClose}
+        ></div>
+        <div className={`modal-container bg-white p-8 rounded-lg z-20 ${isClosing ? "animate-scale-out" : ""}`}>
+          <button className="close-button" onClick={handleClose}>
+            &times;
+          </button>
+          <div className="overflow-auto h-72 p-4 bg-gray-200 rounded-md shadow-inner relative">
+            <pre className="notebook-grid absolute inset-0"></pre>
+            <pre className="whitespace-pre-wrap relative z-10 text-content">{content}</pre>
+          </div>
+
+        </div>
+      </div>
+    );
+  }
 
   function handleInputChange(event: any) {
     setInputValue(event.target.value);
@@ -55,19 +120,11 @@ export function VideoAndDrag() {
     setShowSkimifyTextTool(false);
   }
 
-  function DropDownAnimation() {}
-
-
-
-
 
         
           return (
             <div className="p-2  flex flex-col items-center gap-6 mb-20">
 
-        
-
-        
               <button
                 onClick={toggleSkimifyTool}
                 className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border rounded shadow"
@@ -143,14 +200,25 @@ export function VideoAndDrag() {
               {showSkimifyTool && (
                   <button
                       className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={() => {
+                      onClick={handleSummarizeButtonClick}
                         // Add your summarization logic here
-                        console.log("Summarize button clicked");
-                      }}
+                      
                   >
                     Summarize
                   </button>
-              )}
+              )
+              
+        
+              
+              }
+
+
+              <Modal
+                isOpen={isModalOpen}
+                content={modalContent}
+                onClose={() => setIsModalOpen(false)}
+              />
+
 
             </div>
 

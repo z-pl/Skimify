@@ -27,7 +27,7 @@ class UserRegister(MethodView):
         except IntegrityError:
             abort(500, message="Duplicate username or email")
         except SQLAlchemyError as e:
-            abort(500, message="hello")
+            abort(500, message=str(e))
 
         return {"message": "User Created Succesfully"}, 201
 

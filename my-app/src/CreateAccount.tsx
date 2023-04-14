@@ -1,6 +1,4 @@
-import Form from "./Components/Form";
-import { Player} from '@lottiefiles/react-lottie-player';
-import summary from './assets/112180-paper-notebook-writing-animation.json'
+
 import CreateForm from "./Components/CreateForm";
 
 
