@@ -1,7 +1,5 @@
 import { Edge, Node } from 'reactflow';
 
-import styles from "../../index.css";
-
 export const initialNodes: Node[] = [
   {
     id: '1',
