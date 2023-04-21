@@ -17,8 +17,6 @@ import ReactFlow, {
 
 import 'reactflow/dist/style.css';
 
-import styles from "../../index.css";
-
 import useForceLayout from './useForceLayout';
 import { initialNodes, initialEdges } from './initialElements';
 
