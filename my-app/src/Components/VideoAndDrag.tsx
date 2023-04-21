@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../modal.css";
+// import "../modal.css";
 
 
 
@@ -50,19 +50,19 @@ export function VideoAndDrag() {
 
   function Modal({ isOpen, content, onClose }) {
     const [isClosing, setIsClosing] = useState(false);
-  
+
     useEffect(() => {
       if (isOpen) {
         document.body.style.overflow = "hidden";
       } else {
         document.body.style.overflow = "auto";
       }
-  
+
       return () => {
         document.body.style.overflow = "auto";
       };
     }, [isOpen]);
-  
+
     function handleClose() {
       setIsClosing(true);
       setTimeout(() => {
@@ -70,11 +70,11 @@ export function VideoAndDrag() {
         onClose();
       }, 400);
     }
-  
+
     if (!isOpen) {
       return null;
     }
-  
+
     return (
       <div className="fixed inset-0 flex items-center justify-center">
         <div
@@ -108,20 +108,20 @@ export function VideoAndDrag() {
       setShowSkimifyVideoTool(false);
     }
   }
-  
+
 
   function toggleSkimifyTextTool() {
     setShowSkimifyTextTool(true);
     setShowSkimifyVideoTool(false);
   }
-  
+
   function toggleSkimifyVideoTool() {
     setShowSkimifyVideoTool(true);
     setShowSkimifyTextTool(false);
   }
 
 
-        
+
           return (
             <div className="p-2  flex flex-col items-center gap-6 mb-20">
 
@@ -131,19 +131,19 @@ export function VideoAndDrag() {
               >
                 Skim It
               </button>
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
               {showSkimifyTool && (
             <div className="mt-0 flex justify-center items-center gap-3">
               <div className="relative">
                 <button
                   onClick={toggleSkimifyTextTool}
                   className={`bg-white text-gray-800 font-semibold py-2 px-4 border-t border-b border-l rounded-l shadow  ${
-                    showSkimifyTextTool ? "bg-gray-400" : "hover:bg-gray-100" 
+                    showSkimifyTextTool ? "bg-gray-400" : "hover:bg-gray-100"
                   }`}
                 >
                   Text
@@ -159,9 +159,9 @@ export function VideoAndDrag() {
               </div>
             </div>
           )}
-        
-        
-        
+
+
+
         {showSkimifyTool && showSkimifyTextTool && (
             <div className="mt-8 w-9/12">
               <textarea
@@ -171,21 +171,21 @@ export function VideoAndDrag() {
                 placeholder="Enter your text here"
                 value={inputValue}
                 onChange={handleInputChange}
-        
-        
-                
+
+
+
               ></textarea>
                 <div className="text-right text-gray-600 mt-1">
                 {inputValue.length}/{maxLengthValue} characters
               </div>
-        
+
             </div>
           )}
 
 
-        
-        
-        
+
+
+
               {/* Show the drop zone when clicking on the "Video" button */}
               {showSkimifyVideoTool && showSkimifyTool && (
                 <div className="w-9/12 h-80 mt-8 bg-gray-100 border-2 border-dashed border-gray-400 rounded-lg flex items-center justify-center"
@@ -202,14 +202,14 @@ export function VideoAndDrag() {
                       className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                       onClick={handleSummarizeButtonClick}
                         // Add your summarization logic here
-                      
+
                   >
                     Summarize
                   </button>
               )
-              
-        
-              
+
+
+
               }
 
 
