@@ -133,35 +133,3 @@ class SkimifyTool():
         dotpoints = completion.choices[0].message.content
 
         return dotpoints
-            
-
-
-
-
-
-
-
-            
-
-            
-
-
-
-
-            
-
-    
-
-
-    
-
-
-
-
-
-        
-
-
-    
-        
-
