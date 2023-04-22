@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_smorest import Api
 from db import db
 from resources.user import blp as UserBlueprint
+from resources.summary import blp as SummaryBlueprint
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from datetime import timedelta
@@ -66,6 +67,7 @@ def create_app(db_url=None):
 
     # Register Blueprints here
     api.register_blueprint(UserBlueprint)
+    api.register_blueprint(SummaryBlueprint)
 
 
     return app
