@@ -46,7 +46,7 @@ class SkimifyTool():
             messages=[
                 {
                     "role": "user",
-                    "content": f'Expand upon this dotpoint, give information about the topic from your own understanding but do not assume any extra details: {dotpoint}'
+                    "content": f'Expand upon this dotpoint, give information about the topic from your own understanding but do not assume any extra details. But try to keep this relatively brief as well, three-four sentences: {dotpoint}'
                 }
             ], temperature = 0
         )
