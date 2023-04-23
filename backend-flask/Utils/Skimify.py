@@ -17,7 +17,7 @@ class SkimifyTool():
         Initialize the SkimifyTool instance by loading the OpenAPI API key.
         """
         load_dotenv()
-        openai.api_key = os.getenv('openai_api_key')
+        openai.api_key = os.getenv("open_ai_api_key")
 
     def dotpointToText(self, dotpoint: str) -> str:
         """Expand the input dot point into a more descriptive text using OpenAI GPT-3.5.
@@ -53,7 +53,7 @@ class SkimifyTool():
 
         dotpoint_conversion += completion.choices[0].message.content
         return dotpoint_conversion
-    
+
 
     def textToDotpoint(self, text) -> list:
         """Summarize the input text into a list of key dot points using OpenAI GPT-3.5 Turbo.
@@ -95,13 +95,13 @@ class SkimifyTool():
                 },
             ], temperature= 0
         )
-            
+
             data = completion.choices[0].message.content
             dotpoints += data
 
             if len(chunks)==1:
                 return dotpoints
-            
+
 
         for i in range(1, len(chunks)):
 
@@ -115,10 +115,10 @@ class SkimifyTool():
                 }
             ], temperature = 0
         )
-            
+
             data = completion.choices[0].message.content
             dotpoints += (data)
-        
+
 
         completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",

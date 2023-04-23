@@ -52,7 +52,7 @@ function useForceLayout({ strength = -1000, distance = 150 }: UseForceLayoutOpti
         'link',
         forceLink(simulationLinks)
           .id((d: any) => d.id)
-          .strength(0.1)
+          .strength(0)
       )
       .force('x', forceX().x(simulationNodes[0].x).strength(0.01))
       .force('y', forceY().y(simulationNodes[0].y).strength(0.01))

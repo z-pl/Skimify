@@ -19,14 +19,13 @@ code {
 
 div.node {
   padding: 10px;
+  width: 22rem;
   border-radius: 12px;
   border-width: 3px;
   box-sizing: border-box;
-  word-wrap: break-word;
-  word-break: break-all;
+  overflow-wrap: anywhere;
   border-color: #38bdf8;
-
-
+  font-weight: normal;
 }
 
 .node :global .react-flow__handle {
@@ -60,11 +59,29 @@ path.react-flow__edge-path {
 }
 
 
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px #38bff868;
+  }
+  100% {
+    box-shadow: 0 0 0 12px #38bff868;
+  }
+}
+
 .node {
   opacity: 0;
-  animation: fadein 0.8s ease-in-out;
+  box-shadow: 0 0 0 0px #38bff868;
+  animation: fadein 0.8s ease-in-out, pulse-animation 0.65s;
   animation-fill-mode: forwards;
+  animation-iteration-count: 1,0;
+
 }
+
+.loading {
+  animation-iteration-count: 1,infinite;
+}
+
+
 
 .node .react-flow__handle {
   left: 50%;
@@ -72,4 +89,17 @@ path.react-flow__edge-path {
   transform: translate(-50%, -50%);
   opacity: 0;
   pointer-events: none;
+}
+
+.tw-node {
+  pointer-events: none;
+  display: -webkit-box;
+  max-width: 22rem;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.node:hover {
+  cursor: pointer;
 }

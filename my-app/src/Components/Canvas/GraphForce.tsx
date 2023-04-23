@@ -20,10 +20,14 @@ import 'reactflow/dist/style.css';
 import useForceLayout from './useForceLayout';
 import { initialNodes, initialEdges } from './initialElements';
 
-import { Node } from './Node';
-import { getSummary } from '../../apis/TextAPI';
+import SkimifyNode  from './SkimifyNode';
+import { getSummary, getDotPoints } from '../../apis/TextAPI';
 
 const proOptions: ProOptions = { account: 'paid-pro', hideAttribution: true };
+
+interface SummaryResponse {
+	dotpoints: string;
+}
 
 type ExampleProps = {
   strength?: number;
@@ -53,13 +57,25 @@ function ReactFlowPro({ strength = -880, distance = 1100 }: ExampleProps = {}) {
   const [nodesClickable, setNodesClickable] = useState(true);
 
   useForceLayout({ strength, distance });
-  const createNode = useCallback (async (evt, node) => {
-      setNodesClickable(false);
-      console.log(nodesClickable);
-      const res = await getSummary("");
-      const products = res.products;
 
-      onNodeClick(evt, node, ["","",""])
+
+  const createNodes = useCallback (async (evt, node) => {
+      setNodesClickable(false);
+
+      const parentClass = node.className.split(" ")[1];
+      const apiType = parentClass === "node-summary" ? getSummary : getDotPoints;
+
+      console.log("...loading")
+      evt.target.classList.toggle("loading");
+
+      const text = node.data.label.props.text;
+
+      const res = await apiType(text);
+      evt.target.classList.toggle("loading");
+
+      const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
+
+      onNodeClick(evt, node, data);
     },
     [nodes.length, setNodes, setEdges]
   )
@@ -70,32 +86,25 @@ function ReactFlowPro({ strength = -880, distance = 1100 }: ExampleProps = {}) {
       const childNodes = [];
       const childEdges = [];
 
-      for (let i = 1; i <= nodesToAdd.length; i++) {
-        const childId = `${nodes.length + i}`;
+      for (let i = 0; i < nodesToAdd.length; i++) {
+        const parentClass = node.className.split(" ")[1];
+        const classExt = parentClass === "node-summary" ? "node-dotpoint" : "node-summary";
+
+        const childId = `${nodes.length + (i+1)}`;
         const childNode = {
           id: childId,
           position: { x: node.position.x + (randomCoordSign() * getRandomInt(100)), y: node.position.y + (randomCoordSign() * getRandomInt(100))},
-          data: { label: <Node text={"asdasd"}/>},
-          className: "node",
+          data: { label: <SkimifyNode text={nodesToAdd[i]}/>},
+          className: "node " + classExt,
         };
         const childEdge = { id: `${node.id}->${childId}`, source: node.id, target: childId };
         childNodes.push(childNode);
         childEdges.push(childEdge);
       }
 
-      // const childId = `${nodes.length + 1}`;
-      // const childNode = {
-      //   id: childId,
-      //   position: { x: node.position.x + (randomCoordSign() * 50), y: node.position.y + 100},
-      //   data: { label: <Node text={"asdasd"}/>},
-      //   className: "node",
-      // };
       setNodes((nds) => [...nds, ...childNodes]);
       setEdges((eds) => [...eds, ...childEdges]);
       setNodesClickable(true);
-      console.log(nodesClickable);
-      console.log(nodes);
-
     },
     [nodes.length, setNodes, setEdges]
   );
@@ -110,11 +119,10 @@ function ReactFlowPro({ strength = -880, distance = 1100 }: ExampleProps = {}) {
         proOptions={proOptions}
         onConnect={onConnect}
         nodeOrigin={nodeOrigin}
-        onNodeClick={ nodesClickable ? createNode : ()=>{}}
+        onNodeClick={ nodesClickable ? createNodes : ()=>{}}
         defaultEdgeOptions={defaultEdgeOptions}
         defaultViewport={{ x: window.innerWidth / 2, y: window.innerHeight / 2, zoom: 0 }}
       >
-        <MiniMap />
         <Background  variant={BackgroundVariant.Cross} gap={25} />
       </ReactFlow>
   )

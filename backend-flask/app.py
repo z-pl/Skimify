@@ -7,12 +7,13 @@ from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from datetime import timedelta
 from cache import cache
-
+from flask_cors import CORS
 def create_app(db_url=None):
 
     ACCESS_EXPIRES = timedelta(hours=1)
 
     app = Flask(__name__)
+    CORS(app)
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = "Skimify API"
     app.config["API_VERSION"] = "v1"

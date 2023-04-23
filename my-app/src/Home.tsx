@@ -6,8 +6,6 @@ import { MainBody } from './Components/MainBody';
 import { Graph } from './Components/Canvas/Graph';
 import ReactFlowWrapper from './Components/Canvas/GraphForce';
 
-import { getSummary } from './apis/TextAPI';
-
 function Home() {
     return (
         <div className="Home">

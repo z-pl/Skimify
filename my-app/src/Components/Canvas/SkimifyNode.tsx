@@ -1,18 +1,19 @@
 import { useState } from "react"
 import { Typewriter } from "react-simple-typewriter"
 
-export function Node(props) {
+export default function SkimifyNode(props) {
   const [hideCursor, setHideCursor] = useState(false)
 
   function disableCursor() {
     setHideCursor(true)
   }
   return (
-    <div>
+    <span className="tw-node">
       {
           <Typewriter
-            words={props.text.split(" ")}
+            words={[props.text]}
             loop={1}
+            deleteSpeed = {0}
             cursor={hideCursor}
             onLoopDone={disableCursor}
             cursorStyle='|'
@@ -20,6 +21,6 @@ export function Node(props) {
             delaySpeed={1000}
             />
         }
-    </div>
+    </span>
   )
 }
