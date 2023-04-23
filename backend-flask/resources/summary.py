@@ -25,7 +25,6 @@ class SkimifyTextSummary(MethodView):
             Returns:
                 list: A list containing 'n' summarized key points from the input text.
             
-
             """
         
             Skimify = SkimifyTool()
@@ -36,6 +35,9 @@ class SkimifyTextSummary(MethodView):
 
             if data[0]=="":
                   del data[0]
+
+            data = [i.replace('\n','') for i in data]
+            data = [i.replace(' - ','') for i in data]
 
 
             return jsonify({"dotpoints": data})
