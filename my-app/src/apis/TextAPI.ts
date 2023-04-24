@@ -7,7 +7,7 @@ const apiUrls = {
 }
 
 const getSummary = async (inputText) => {
-  const res = await axios.post(apiUrls.summaryUrl,{
+  const res = await axios.post(apiUrls.summaryUrl, {
     text: inputText
   });
 
