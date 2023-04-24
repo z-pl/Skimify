@@ -64,16 +64,20 @@ function ReactFlowPro({ strength = -880, distance = 1100 }: ExampleProps = {}) {
 
       const parentClass = node.className.split(" ")[1];
       const apiType = parentClass === "node-summary" ? getSummary : getDotPoints;
-
+      console.log(node);
       console.log("...loading")
+
       evt.target.classList.toggle("loading");
+      evt.target.classList.toggle("nodrag");
 
       const text = node.data.label.props.text;
-
+      console.log(text);
       const res = await apiType(text);
-      evt.target.classList.toggle("loading");
-
+      console.log("3")
       const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
+
+      evt.target.classList.toggle("loading",  evt.target.classList.contains("loading"));
+      evt.target.classList.toggle("nodrag");
 
       onNodeClick(evt, node, data);
     },
