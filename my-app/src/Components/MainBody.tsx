@@ -1,11 +1,16 @@
 import { LandingHeader } from "./LandingHeader";
+import { TextVideo } from "./TextVideo";
 import { VideoAndDrag } from "./VideoAndDrag";
 
 export function MainBody() {
   return (
+
+    //      <VideoAndDrag></VideoAndDrag>
+
     <div >
       <LandingHeader></LandingHeader>
-      <VideoAndDrag></VideoAndDrag>
+      <TextVideo></TextVideo>
+            
     </div>
   )
 }

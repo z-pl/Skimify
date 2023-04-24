@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-// import "../modal.css";
+import { observer } from "mobx-react-lite";
+import textStore from "../UserInputText"
 
 
 
-export function VideoAndDrag() {
+export const VideoAndDrag = observer(function VideoAndDrag() {
 
   const [showSkimifyTool, setShowSkimifyTool] = useState(false);
 
@@ -121,7 +122,6 @@ export function VideoAndDrag() {
   }
 
 
-
           return (
             <div className="p-2  flex flex-col items-center gap-6 mb-20">
 
@@ -131,10 +131,6 @@ export function VideoAndDrag() {
               >
                 Skim It
               </button>
-
-
-
-
 
 
               {showSkimifyTool && (
@@ -160,8 +156,6 @@ export function VideoAndDrag() {
             </div>
           )}
 
-
-
         {showSkimifyTool && showSkimifyTextTool && (
             <div className="mt-8 w-9/12">
               <textarea
@@ -173,7 +167,6 @@ export function VideoAndDrag() {
                 onChange={handleInputChange}
 
 
-
               ></textarea>
                 <div className="text-right text-gray-600 mt-1">
                 {inputValue.length}/{maxLengthValue} characters
@@ -181,10 +174,6 @@ export function VideoAndDrag() {
 
             </div>
           )}
-
-
-
-
 
               {/* Show the drop zone when clicking on the "Video" button */}
               {showSkimifyVideoTool && showSkimifyTool && (
@@ -207,9 +196,6 @@ export function VideoAndDrag() {
                     Summarize
                   </button>
               )
-
-
-
               }
 
 
@@ -227,4 +213,4 @@ export function VideoAndDrag() {
 
 
     );
-}
+})

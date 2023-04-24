@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Typewriter } from 'react-simple-typewriter'
+import textAreaStore from "../UserInputText";
+import { observer } from "mobx-react-lite";
 
 export function LandingHeader() {
 
@@ -35,8 +37,6 @@ export function LandingHeader() {
         Skimify is an AI tool that enables students to summarize their lecture videos and notes.
       </div>
 
-
-      
     </div>
 
   )
