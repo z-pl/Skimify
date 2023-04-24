@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import textStore from "../UserInputText"
+import textStore from "../mobx/stores/UserInputText"
 
 
 

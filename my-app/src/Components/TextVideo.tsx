@@ -1,13 +1,14 @@
-import React, { useState, useRef } from "react"; 
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import textAreaStore from "../UserInputText";
+import textAreaStore from "../mobx/stores/UserInputText";
+import canvasStore from "../mobx/stores/CanvasStore";
 import { observer } from "mobx-react-lite";
 
 
 export const TextVideo = observer(() => {
 
   const [inputType, setInputType] = useState("text");
-  
+
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   const radioButtonStyle = "w-6 h-6 border-2 border-blue-600 rounded-full p-0.5 flex items-center justify-center";
@@ -15,14 +16,15 @@ export const TextVideo = observer(() => {
   const radioButtonInnerStyle = "w-3 h-3 bg-blue-600 rounded-full transform transition-transform duration-200";
 
   const handleSkimItClick = () => {
+
     if (bottomRef.current){
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
-
     }
 
+    canvasStore.setShowCanvas()
     console.log("Textarea value:", textAreaStore.textValue);
   };
-  
+
   return (
     <div className="flex flex-col items-center space-y-5 mt-3">
       <div className="p-4 bg-gray-100 rounded-md shadow-md">
@@ -100,9 +102,9 @@ export const TextVideo = observer(() => {
       >
         Skim It
       </motion.button>
-      <div ref={bottomRef}></div> 
+      <div ref={bottomRef}></div>
 
     </div>
-    
+
   );
 })

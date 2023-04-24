@@ -4,17 +4,15 @@ import { Navbar } from './Components/Navbar';
 import {Routes} from "react-router-dom";
 import { MainBody } from './Components/MainBody';
 import { Graph } from './Components/Canvas/Graph';
-import ReactFlowWrapper from './Components/Canvas/GraphForce';
-
+import {CanvasGrid} from './Components/CanvasGrid';
 function Home() {
+
     return (
         <div className="Home">
             <div className="App flex flex-col gap-20">
              <Navbar></Navbar>
              <MainBody></MainBody>
-             <div className=' h-screen m-4 border border-black'>
-              <ReactFlowWrapper />
-             </div>
+              <CanvasGrid />
           </div>
         </div>
     );

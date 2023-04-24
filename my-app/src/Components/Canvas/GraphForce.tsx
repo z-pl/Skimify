@@ -15,6 +15,11 @@ import ReactFlow, {
   MiniMap,
 } from 'reactflow';
 
+import textAreaStore from "../../mobx/stores/UserInputText";
+import canvasStore from '../../mobx/stores/CanvasStore';
+
+import { observer } from "mobx-react-lite";
+import {Node} from 'reactflow';
 import 'reactflow/dist/style.css';
 
 import useForceLayout from './useForceLayout';
@@ -38,9 +43,17 @@ const nodeOrigin: NodeOrigin = [0.5, 0.5];
 const defaultEdgeOptions = { style: { stroke: '#67e8f9', strokeWidth: 3 } };
 const emojis = ['random5random5random5random5random5random5random5random5random5random5random5random5'];
 
-const randomEmoji = (): string => {
-  return emojis[Math.floor(Math.random() * (emojis.length - 1))];
-};
+const getFirstNode = () => {
+  console.log("calling functiom")
+  console.log(textAreaStore.textValue)
+  const firstNode: Node = {
+    id: '1',
+    position: { x: 0, y: 0 },
+    data: { label: <SkimifyNode text={textAreaStore.textValue}/> },
+    className: "node node-summary",
+  }
+  return firstNode;
+}
 
 const randomCoordSign = () => {
   return Math.random() > 0.5 ? -1 : 1;
@@ -50,10 +63,10 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function ReactFlowPro({ strength = -880, distance = 1100 }: ExampleProps = {}) {
+const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProps = {}) => {
   const { project } = useReactFlow();
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([getFirstNode()]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [nodesClickable, setNodesClickable] = useState(true);
 
   useForceLayout({ strength, distance });
@@ -64,16 +77,13 @@ function ReactFlowPro({ strength = -880, distance = 1100 }: ExampleProps = {}) {
 
       const parentClass = node.className.split(" ")[1];
       const apiType = parentClass === "node-summary" ? getSummary : getDotPoints;
-      console.log(node);
       console.log("...loading")
 
       evt.target.classList.toggle("loading");
       evt.target.classList.toggle("nodrag");
 
       const text = node.data.label.props.text;
-      console.log(text);
       const res = await apiType(text);
-      console.log("3")
       const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
 
       evt.target.classList.toggle("loading",  evt.target.classList.contains("loading"));
@@ -130,7 +140,7 @@ function ReactFlowPro({ strength = -880, distance = 1100 }: ExampleProps = {}) {
         <Background  variant={BackgroundVariant.Cross} gap={25} />
       </ReactFlow>
   )
-}
+})
 
 function ReactFlowWrapper(props: ExampleProps) {
   return (

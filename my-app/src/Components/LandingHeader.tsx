@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Typewriter } from 'react-simple-typewriter'
-import textAreaStore from "../UserInputText";
+import textAreaStore from "../mobx/stores/UserInputText";
 import { observer } from "mobx-react-lite";
 
 export function LandingHeader() {
