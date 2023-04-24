@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class TextAreaStore {
   textValue = "";
-  
+
 
   constructor() {
     makeAutoObservable(this);
