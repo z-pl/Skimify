@@ -5,17 +5,20 @@ import {Routes} from "react-router-dom";
 import { MainBody } from './Components/MainBody';
 import { Graph } from './Components/Canvas/Graph';
 import {CanvasGrid} from './Components/CanvasGrid';
-function Home() {
+import { observer } from "mobx-react-lite";
+import canvasStore from './mobx/stores/CanvasStore';
+
+const Home = observer(() =>  {
 
     return (
         <div className="Home">
             <div className="App flex flex-col gap-20">
              <Navbar></Navbar>
              <MainBody></MainBody>
-              <CanvasGrid />
+              {canvasStore.showCanvas && <CanvasGrid />}
           </div>
         </div>
     );
-}
+})
 
 export default Home;

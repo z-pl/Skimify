@@ -1,11 +1,14 @@
 import { Edge, Node } from 'reactflow';
 import SkimifyNode from './SkimifyNode';
+import textAreaStore from "../../mobx/stores/UserInputText";
+import canvasStore from '../../mobx/stores/CanvasStore';
+
 const text = ""
 export const initialNodes: Node[] = [
   {
     id: '1',
     position: { x: 0, y: 0 },
-    data: { label: <SkimifyNode text={''}/> },
+    data: { label: <SkimifyNode text={canvasStore.firstNodeText}/> },
     className: "node node-summary",
   },
 ];
