@@ -46,7 +46,7 @@ class SkimifyTool():
             messages=[
                 {
                     "role": "user",
-                    "content": f'Expand upon this dotpoint, give information about the topic from your own understanding but do not assume any extra details. But try to keep this relatively brief as well, three-four sentences: {dotpoint}'
+                    "content": f'Expand upon this dotpoint, give information about the topic from your own understanding but do not assume any extra details. But try to keep this relatively brief as well, three-four sentences: "{dotpoint}"'
                 }
             ], temperature = 0
         )
@@ -90,7 +90,7 @@ class SkimifyTool():
             messages=[
                 {
                     "role": "user",
-                    "content": f'Please summarise only the key points of this text into dotpoints. You must use "@dp" to indicate to the start of all dotpoints in your response. Ensure dotpoints are short: {chunks[0]} \
+                    "content": f'Please summarise only the key points of this text into dotpoints. You must use "@dp" to indicate to the start of all dotpoints in your response. Ensure dotpoints are short: "{chunks[0]}" \
                         \n Do not repeat yourself'
                 },
             ], temperature= 0
@@ -110,8 +110,8 @@ class SkimifyTool():
             messages=[
                 {
                     "role": "user",
-                    "content": f'Please summarise the key points of this lecture into dotpoints. You must use "@dp" to indicate to the start of all dotpoints in your response: {chunks[i]} \n Please use \
-                        this as context for dotpoints which you have already mentioned: {chunks[i-1]} \n Do not repeat yourself'
+                    "content": f'Please summarise the key points of this lecture into dotpoints. You must use "@dp" to indicate to the start of all dotpoints in your response: "{chunks[i]}" \n Please use \
+                        this as context for dotpoints which you have already mentioned: "{chunks[i-1]}" \n Do not repeat yourself'
                 }
             ], temperature = 0
         )
@@ -125,7 +125,7 @@ class SkimifyTool():
         messages=[
             {
                 "role": "user",
-                "content": f'For a lecture summary, please reduce the amount of dotpoints to three-seven dotpoints by only keeping the major and important dotpoints". The text is {dotpoints} \n Please label all the dotpoints in your output with "@dp"   '
+                "content": f'For a lecture summary, please reduce the amount of dotpoints to three-seven dotpoints by only keeping the major and important dotpoints". The text is: "{dotpoints}" \n Please label all the dotpoints in your output with "@dp"   '
             }
         ], temperature = 0
     )

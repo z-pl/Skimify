@@ -16,34 +16,25 @@ export const TextVideo = observer(() => {
   const radioButtonInnerStyle = "w-3 h-3 bg-blue-600 rounded-full transform transition-transform duration-200";
 
   const handleSkimItClick = () => {
+    canvasStore.setShowCanvas();
+    console.log("Textarea value:", textAreaStore.textValue);
 
-    if (bottomRef.current){
-      bottomRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+      if (bottomRef.current) {
+        bottomRef.current.scrollIntoView({ behavior: "smooth" });
+      }
     canvasStore.setFirstNodeText(textAreaStore.textValue)
 
-    canvasStore.setShowCanvas()
-    console.log("Textarea value:", textAreaStore.textValue);
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight, 
+      behavior: "smooth",
+    });
+  }, 0); 
+
   };
 
-  // const handleSkimItClick = () => {
-  //   canvasStore.setShowCanvas();
 
-  //   console.log("Textarea value:", textAreaStore.textValue);
-  //     if (bottomRef.current) {
-  //       bottomRef.current.scrollIntoView({ behavior: "smooth" });
-  //     }
 
-  //     canvasStore.setFirstNodeText(textAreaStore.textValue)
-
-  //   setTimeout(() => {
-  //     window.scrollTo({
-  //       top: document.body.scrollHeight,
-  //       behavior: "smooth",
-  //     });
-  //   }, 10);
-
-  // };
 
   return (
     <div className="flex flex-col items-center space-y-5 mt-3">
@@ -99,7 +90,7 @@ export const TextVideo = observer(() => {
     <textarea
       rows={15}
       maxLength={10000}
-      className="w-full px-4 py-2 text-lg bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 h-96"
+      className="w-full px-4 py-2 text-lg bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 h-96 min-w-full min-h-[10rem]"
       placeholder="Enter your lecture transcript here..."
       value={textAreaStore.textValue}
       onChange={(e) => textAreaStore.setTextValue(e.target.value)}
