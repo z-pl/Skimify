@@ -98,7 +98,7 @@ export const TextVideo = observer(() => {
     <textarea
       rows={15}
       maxLength={10000}
-      className="w-full px-4 py-2 text-lg bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 h-96"
+      className="w-full px-4 py-2 text-lg bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 h-96 min-w-full min-h-[10rem]"
       placeholder="Enter your lecture transcript here..."
       value={textAreaStore.textValue}
       onChange={(e) => textAreaStore.setTextValue(e.target.value)}
