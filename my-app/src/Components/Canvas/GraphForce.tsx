@@ -1,4 +1,5 @@
 import React, { useCallback, MouseEvent, useState } from 'react';
+import { flushSync } from 'react-dom';
 import ReactFlow, {
   Background,
   Panel,
@@ -48,7 +49,7 @@ const getFirstNode = () => {
   const firstNode: Node = {
     id: '1',
     position: { x: 0, y: 0 },
-    data: { label: <SkimifyNode text={canvasStore.firstNodeText }/> },
+    data: { label: <SkimifyNode text={"biology, study of living things and their vital processes. The field deals with all the physicochemical aspects of life. The modern tendency toward cross-disciplinary research and the unification of scientific knowledge and investigation from different fields has resulted in significant overlap of the field of biology with other scientific disciplines. Modern principles of other fields—chemistry, medicine, and physics, for example—are integrated with those of biology in areas such as biochemistry, biomedicine, and biophysics." }/> },//canvasStore.firstNodeText
     className: "node node-summary",
   }
   return [firstNode];
@@ -66,7 +67,7 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
   const { project } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(getFirstNode());
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [nodesClickable, setNodesClickable] = useState(true);
+  const [nodesToAdd, setNodesToAdd] = useState([]);
 
   useForceLayout({ strength, distance });
 
@@ -85,6 +86,38 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
       );
     }, [setNodes]
   );
+  const onNodeClick = useCallback(
+    (evt, node) => {
+      //console.table("node: ", node)
+      //console.table("node to add: ", nodesToAdd)
+      const childNodes = [];
+      const childEdges = [];
+
+      const nodesToAdd = canvasStore.nodesToAdd;
+      for (let i = 0; i < nodesToAdd.length; i++) {
+        const parentClass = node.className.split(" ")[1];
+        const classExt = parentClass === "node-summary" ? "node-dotpoint" : "node-summary";
+
+        const childId = `${ canvasStore.nodesOffset+(i)}`;
+        const childNode = {
+          id: childId,
+          position: { x: node.position.x + (randomCoordSign() * getRandomInt(100)), y: node.position.y + (randomCoordSign() * getRandomInt(100))},
+          data: { label: <SkimifyNode text={nodesToAdd[i]}/>},
+          className: "node " + classExt,
+        };
+
+        console.log("node id: ", node.id, "  childId: ", childId);
+        const childEdge = { id: `${node.id}->${childId}`, source: node.id, target: childId };
+        childNodes.push(childNode);
+        childEdges.push(childEdge);
+      }
+      canvasStore.setNodesOffet(nodesToAdd.length)
+      console.log("ooff", canvasStore.nodesOffset)
+      setNodes((nds) => [...nds, ...childNodes]);
+      setEdges((eds) => [...eds, ...childEdges]);
+    },
+    [nodes, setNodes, setEdges]
+  );
 
   const createNodes = useCallback (async (evt, node:Node) => {
 
@@ -92,48 +125,18 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
       const apiType = parentClass === "node-summary" ? getSummary : getDotPoints;
       console.log("loading...")
       toggleNodeClass(node.id,"loading")
-
       const text = node.data.label.props.text;
-      const res = await apiType(text);
 
-      console.log("donge");
+
+      const res = await apiType(text);
       toggleNodeClass(node.id, "loading")
 
       const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
-      onNodeClick(evt, node, data);
+      canvasStore.setNodesToAdd(data);
+      onNodeClick(evt, node);
     },
-    [nodes.length, setNodes, setEdges]
+    [toggleNodeClass,onNodeClick,nodes.length]
   )
-
-  const onNodeClick = useCallback(
-    (evt, node, nodesToAdd) => {
-      console.log("here")
-      const childNodes = [];
-      const childEdges = [];
-
-      for (let i = 0; i < nodesToAdd.length; i++) {
-        const parentClass = node.className.split(" ")[1];
-        const classExt = parentClass === "node-summary" ? "node-dotpoint" : "node-summary";
-
-        const childId = `${nodes.length + (i+1)}`;
-        const childNode = {
-          id: childId,
-          position: { x: node.position.x + (randomCoordSign() * getRandomInt(100)), y: node.position.y + (randomCoordSign() * getRandomInt(100))},
-          data: { label: <SkimifyNode text={nodesToAdd[i]}/>},
-          className: "node " + classExt,
-        };
-        const childEdge = { id: `${node.id}->${childId}`, source: node.id, target: childId };
-        childNodes.push(childNode);
-        childEdges.push(childEdge);
-      }
-      setNodes((nds) => [...nds, ...childNodes]);
-      setEdges((eds) => [...eds, ...childEdges]);
-    },
-    [nodes.length, setNodes, setEdges]
-  );
-
-
-
   const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
   return (

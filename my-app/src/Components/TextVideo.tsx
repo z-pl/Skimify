@@ -15,35 +15,34 @@ export const TextVideo = observer(() => {
 
   const radioButtonInnerStyle = "w-3 h-3 bg-blue-600 rounded-full transform transition-transform duration-200";
 
-  const handleSkimItClick = () => {
+  // const handleSkimItClick = () => {
 
-    if (bottomRef.current){
-      bottomRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+  //   if (bottomRef.current){
+  //     bottomRef.current.scrollIntoView({ behavior: "smooth" });
+  //   }
+  //   canvasStore.setFirstNodeText(textAreaStore.textValue)
+
+  //   canvasStore.setShowCanvas()
+  //   console.log("Textarea value:", textAreaStore.textValue);
+  // };
+
+  const handleSkimItClick = () => {
+    canvasStore.setShowCanvas();
     canvasStore.setFirstNodeText(textAreaStore.textValue)
 
-    canvasStore.setShowCanvas()
-    console.log("Textarea value:", textAreaStore.textValue);
+      if (bottomRef.current) {
+        bottomRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+
+
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+    }, 10);
+
   };
-
-  // const handleSkimItClick = () => {
-  //   canvasStore.setShowCanvas();
-
-  //   console.log("Textarea value:", textAreaStore.textValue);
-  //     if (bottomRef.current) {
-  //       bottomRef.current.scrollIntoView({ behavior: "smooth" });
-  //     }
-
-  //     canvasStore.setFirstNodeText(textAreaStore.textValue)
-
-  //   setTimeout(() => {
-  //     window.scrollTo({
-  //       top: document.body.scrollHeight,
-  //       behavior: "smooth",
-  //     });
-  //   }, 10);
-
-  // };
 
   return (
     <div className="flex flex-col items-center space-y-5 mt-3">
