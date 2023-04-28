@@ -117,7 +117,7 @@ export const TextVideo = observer(() => {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.99 }}
         onClick={handleSkimItClick}
-        className="px-4 py-2 text-lg font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+        className="skim-it-btn"
       >
         Skim It
       </motion.button>
