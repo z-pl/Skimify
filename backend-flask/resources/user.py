@@ -22,14 +22,14 @@ class UserRegister(MethodView):
             password = pbkdf2_sha256.hash(user_data["password"]),
             email = user_data["email"]
         )
-
+        print(new_user)
         try:
             db.session.add(new_user)
             db.session.commit()
         except IntegrityError:
-            abort(500, message="Duplicate username or email")
+            abort(400, message="Duplicate username or email")
         except SQLAlchemyError as e:
-            abort(500, message=str(e))
+            abort(400, message=str(e))
 
         return {"message": "User Created Succesfully"}, 201
 
@@ -44,9 +44,9 @@ class UserLogin(MethodView):
         if user and pbkdf2_sha256.verify(user_data["password"], user.password):
             access_token = create_access_token(identity=user.id, fresh=True)
             refresh_token = create_refresh_token(identity=user.id)
-            return {"access_token": access_token, "refresh_token": refresh_token}
+            return {"access_token": access_token, "refresh_token": refresh_token}, 200
 
-        abort(401, "Invalid Crendials")
+        abort(401, message="Invalid Crendials")
 
 @blp.route("/refresh")
 class TokenRefresh(MethodView):
