@@ -8,18 +8,23 @@ from flask_migrate import Migrate
 from datetime import timedelta
 from cache import cache
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+
 def create_app(db_url=None):
 
     ACCESS_EXPIRES = timedelta(hours=1)
 
     app = Flask(__name__)
+    load_dotenv()
+
     CORS(app)
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = "Skimify API"
     app.config["API_VERSION"] = "v1"
     app.config["OPENAPI_VERSION"] = "3.0.3"
     app.config["OPENAPI_URL_PREFIX"] = "/"
-    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or "sqlite:///data.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DB_URL", "sqlite:///data.db")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PROPAGATE_EXCEPTIONS"] = True
 

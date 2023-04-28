@@ -154,7 +154,7 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
         elementsSelectable={false}
         defaultViewport={{ x: window.innerWidth / 2, y: window.innerHeight / 2, zoom: 0.5 }}
       >
-        <Background className='bg-red-100'  variant={BackgroundVariant.Dots} gap={25} />
+        <Background className='bg-slate-100'  variant={BackgroundVariant.Dots} gap={25} />
       </ReactFlow>
   )
 })
