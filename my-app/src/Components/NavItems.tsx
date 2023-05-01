@@ -9,8 +9,12 @@ export function NavItems() {
   const handleLogout = async (event) => {
     event.preventDefault()
 
-    const res = await logoutUser(tokenStore.getToken())
-    tokenStore.removeToken()
+    try {
+      const res = await logoutUser(tokenStore.getToken())
+      tokenStore.removeToken()
+    } catch(err) {
+      tokenStore.removeToken()
+    }
     navigate("/")
   }
   return (

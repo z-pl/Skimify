@@ -46,9 +46,9 @@ const logoutUser = async (token) => {
         }
       }
     );
-    console.log(res)
+
   } catch (err) {
-    throw new Error(err.response.data.message)
+    throw new Error("Logout error")
   }
 }
 

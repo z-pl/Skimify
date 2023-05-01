@@ -8,11 +8,32 @@ import {CanvasGrid} from './Components/CanvasGrid';
 import { observer } from "mobx-react-lite";
 import canvasStore from './mobx/stores/CanvasStore';
 
-const Home = observer(() =>  {
 
+import axios from 'axios';
+import TokenStore from './mobx/stores/TokenStore';
+const Home = observer(() =>  {
+    function handleClikc(event) {
+      console.log(event)
+
+      async function getRand() {
+        const res = await axios.post("http://127.0.0.1:5000/users", {
+        }, {
+          headers: {
+            Authorization: 'Bearer ' + TokenStore.getToken()
+          }
+        }
+      );
+
+        console.log(res)
+      }
+
+      getRand()
+
+    }
     return (
         <div className="Home">
             <div className="App flex flex-col gap-20">
+            <button onClick={handleClikc}>test</button>
              <Navbar></Navbar>
              <MainBody></MainBody>
               {canvasStore.showCanvas && <CanvasGrid />}
