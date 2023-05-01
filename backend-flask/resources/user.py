@@ -22,7 +22,7 @@ class UserRegister(MethodView):
             password = pbkdf2_sha256.hash(user_data["password"]),
             email = user_data["email"]
         )
-        print(new_user)
+
         try:
             db.session.add(new_user)
             db.session.commit()
@@ -72,3 +72,7 @@ class Users(MethodView):
     @blp.response(200, UserSchema(many=True))
     def get(self):
         return UserModel.query.all()
+
+    @jwt_required()
+    def post(self):
+        return {"message": "User authhhh"}

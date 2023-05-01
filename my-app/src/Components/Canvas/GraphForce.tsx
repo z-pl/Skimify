@@ -48,7 +48,7 @@ const getFirstNode = () => {
   //console.log("test: ", canvasStore.firstNodeText)
   const firstNode: Node = {
     id: '1',
-    position: { x: 0, y: 0 },
+    position: { x: -10, y: -150 },
     data: { label: <SkimifyNode text={"biology, study of living things and their vital processes. The field deals with all the physicochemical aspects of life. The modern tendency toward cross-disciplinary research and the unification of scientific knowledge and investigation from different fields has resulted in significant overlap of the field of biology with other scientific disciplines. Modern principles of other fields—chemistry, medicine, and physics, for example—are integrated with those of biology in areas such as biochemistry, biomedicine, and biophysics." }/> },//canvasStore.firstNodeText
     className: "node node-summary",
   }
@@ -123,13 +123,18 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
 
       const parentClass = node.className.split(" ").at(-1);
       const apiType = parentClass === "node-summary" ? getSummary : getDotPoints;
-      console.log("loading...")
       toggleNodeClass(node.id,"loading")
       const text = node.data.label.props.text;
 
+      let res = null;
+      try {
+        res = await apiType(text);
+        toggleNodeClass(node.id, "loading")
 
-      const res = await apiType(text);
-      toggleNodeClass(node.id, "loading")
+      } catch(err) {
+        toggleNodeClass(node.id, "loading");
+        toggleNodeClass(node.id, "loading-error");
+      }
 
       const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
       canvasStore.setNodesToAdd(data);
@@ -152,8 +157,9 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
         defaultEdgeOptions={defaultEdgeOptions}
         minZoom={0.3}
         elementsSelectable={false}
-        defaultViewport={{ x: window.innerWidth / 2, y: window.innerHeight / 2, zoom: 0.5 }}
+        defaultViewport={{ x: window.innerWidth / 2, y: window.innerHeight / 2, zoom: 0.7 }}
       >
+        <MiniMap />
         <Background className='bg-slate-100'  variant={BackgroundVariant.Dots} gap={25} />
       </ReactFlow>
   )

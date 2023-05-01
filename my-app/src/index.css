@@ -89,8 +89,7 @@ div.node {
   overflow-wrap: anywhere;
   font-weight: normal;
 
-  border-color: black;
-
+  border-color: transparent;
 }
 
 .node :global .react-flow__handle {
@@ -145,28 +144,42 @@ path.react-flow__edge-path {
 
 @keyframes pulse-animation {
   0% {
-    box-shadow: 0 0 0 0px #38bff868;
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.0.05);
   }
   100% {
-    box-shadow: 0 0 0 12px #38bff868;
+    box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.05);
+  }
+}
+
+@keyframes pulse-error-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.0.05);
+  }
+  100% {
+    box-shadow: 0 0 0 12px rgba(255, 0, 0, 0.05);
   }
 }
 
 .node {
   opacity: 0;
-  box-shadow: 0 0 0 0px #38bff868;
-  animation: fadein 0.8s ease-in-out, pulse-animation 0.65s;
+  animation: fadein 0.8s ease-in-out, pulse-animation 0.65s, pulse-error-animation 0.65s;
   animation-fill-mode: forwards;
-  animation-iteration-count: 1,0;
+  animation-iteration-count: 1,0,0;
 }
 
 .noloading {
   animation-iteration-count: 1,0;
 }
+
 .loading {
-  animation-iteration-count: 1,infinite !important;
+  animation-iteration-count: 1,infinite, 0 !important;
+  box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.05);
 }
 
+.loading-error {
+  animation-iteration-count: 1,0, infinite !important;
+  box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.05);
+}
 
 
 .node .react-flow__handle {
@@ -186,12 +199,13 @@ path.react-flow__edge-path {
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  font-family:Arial, Helvetica, sans-serif;
-  font-weight: bold;
+  font-family: 'Roboto';
+  color: black;
+  font-weight: 400;
 
 }
 .node-summary {
-  background-color: white !important;
+  background-color: #E7E7E7 !important;
 }
 
 .node-dotpoint {
