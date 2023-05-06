@@ -28,6 +28,7 @@ import { initialNodes, initialEdges } from './initialElements';
 
 import SkimifyNode  from './SkimifyNode';
 import { getSummary, getDotPoints } from '../../apis/TextAPI';
+import RestartCanvas from './RestartCanvas';
 
 const proOptions: ProOptions = { account: 'paid-pro', hideAttribution: true };
 
@@ -59,15 +60,15 @@ const randomCoordSign = () => {
   return Math.random() > 0.5 ? -1 : 1;
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+function getRandomInt(min, max) {
+  return  Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProps = {}) => {
-  const { project } = useReactFlow();
+  // const { project } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(getFirstNode());
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [nodesToAdd, setNodesToAdd] = useState([]);
+  // const [nodesToAdd, setNodesToAdd] = useState([]);
 
   useForceLayout({ strength, distance });
 
@@ -94,29 +95,28 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
       const childEdges = [];
 
       const nodesToAdd = canvasStore.nodesToAdd;
+
       for (let i = 0; i < nodesToAdd.length; i++) {
         const parentClass = node.className.split(" ")[1];
+        console.log(parentClass);
         const classExt = parentClass === "node-summary" ? "node-dotpoint" : "node-summary";
-
-        const childId = `${ canvasStore.nodesOffset+(i)}`;
+        const childId = `${ canvasStore.nodesOffset+(i+1)}`;
         const childNode = {
           id: childId,
-          position: { x: node.position.x + (randomCoordSign() * getRandomInt(100)), y: node.position.y + (randomCoordSign() * getRandomInt(100))},
+          position: { x: node.position.x + (randomCoordSign() * getRandomInt(100,200)), y: node.position.y + (randomCoordSign() * getRandomInt(100,200))},
           data: { label: <SkimifyNode text={nodesToAdd[i]}/>},
           className: "node " + classExt,
         };
 
-        console.log("node id: ", node.id, "  childId: ", childId);
         const childEdge = { id: `${node.id}->${childId}`, source: node.id, target: childId };
         childNodes.push(childNode);
         childEdges.push(childEdge);
       }
       canvasStore.setNodesOffet(nodesToAdd.length)
-      console.log("ooff", canvasStore.nodesOffset)
       setNodes((nds) => [...nds, ...childNodes]);
       setEdges((eds) => [...eds, ...childEdges]);
     },
-    [nodes, setNodes, setEdges]
+    [setNodes, setEdges]
   );
 
   const createNodes = useCallback (async (evt, node:Node) => {
@@ -137,13 +137,18 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
       }
 
       const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
+      console.log("data: ", data)
       canvasStore.setNodesToAdd(data);
       onNodeClick(evt, node);
     },
-    [toggleNodeClass,onNodeClick,nodes.length]
+    [toggleNodeClass,onNodeClick]
   )
   const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
+  const resetGraph = () => {
+    setNodes([]);
+    setEdges([]);
+  }
   return (
       <ReactFlow
         nodes={nodes}
@@ -159,6 +164,7 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
         elementsSelectable={false}
         defaultViewport={{ x: window.innerWidth / 2, y: window.innerHeight / 2, zoom: 0.7 }}
       >
+        <Panel position='top-left'><RestartCanvas resetGraph={resetGraph}></RestartCanvas></Panel>
         <MiniMap />
         <Background className='bg-slate-100'  variant={BackgroundVariant.Dots} gap={25} />
       </ReactFlow>

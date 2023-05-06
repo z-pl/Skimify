@@ -23,7 +23,6 @@ const Home = observer(() =>  {
           }
         }
       );
-
         console.log(res)
       }
 
@@ -33,7 +32,7 @@ const Home = observer(() =>  {
     return (
         <div className="Home">
             <div className="App flex flex-col gap-20">
-            <button onClick={handleClikc}>test</button>
+            {/* <button onClick={handleClikc}>test</button> */}
              <Navbar></Navbar>
              <MainBody></MainBody>
               {canvasStore.showCanvas && <CanvasGrid />}
