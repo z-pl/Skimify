@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import textAreaStore from "../mobx/stores/UserInputText";
 import canvasStore from "../mobx/stores/CanvasStore";
 import { observer } from "mobx-react-lite";
@@ -107,20 +107,23 @@ export const TextVideo = observer(() => {
       {textAreaStore.textValue.length}/10000
     </div>
   </div>
-) : (
+  ) : (
   <div className="mt-8 w-10/12 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center h-96">
     <p className="text-gray-500 text-lg">Drag a file...</p>
   </div>
-)}
+  )}
 
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.99 }}
-        onClick={handleSkimItClick}
-        className="skim-it-btn"
-      >
-        Skim It
-      </motion.button>
+      <AnimatePresence>
+        {!canvasStore.showCanvas &&
+        (<motion.button
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{ opacity: 0 }}
+            onClick={handleSkimItClick}
+            className={"skim-it-btn " + (!canvasStore.showCanvas ? "btn-enable": "btn-disable")} >
+              Skim It
+        </motion.button>)}
+      </AnimatePresence>
       <div ref={bottomRef}></div>
 
     </div>

@@ -118,10 +118,21 @@ path.react-flow__edge-path {
   animation: shiftButtonUp 0.1s ease-in-out;
   position: relative;
 }
+
 .skim-it-btn:hover {
   animation: shiftButtonDown 0.1s ease-in-out;
   animation-fill-mode: forwards;
 }
+
+.restart-canvas-btn {
+  background-color:#ffffff;
+  border: 2px solid black;
+}
+
+.restart-canvas-txt {
+  font-weight: bold;
+}
+
 
 
 
@@ -165,7 +176,11 @@ path.react-flow__edge-path {
   animation: fadein 0.8s ease-in-out, pulse-animation 0.65s, pulse-error-animation 0.65s;
   animation-fill-mode: forwards;
   animation-iteration-count: 1,0,0;
+  border: 4px solid black !important;
+  box-shadow: 4px 4px black;
+  position: relative;
 }
+
 
 .noloading {
   animation-iteration-count: 1,0;
@@ -188,10 +203,13 @@ path.react-flow__edge-path {
   transform: translate(-50%, -50%);
   opacity: 0;
   pointer-events: none;
+
 }
 
+
+
 .tw-node {
-  font-size:small;
+  font-size:large;
   pointer-events: none;
   display: -webkit-box;
   max-width: 22rem;
@@ -201,7 +219,8 @@ path.react-flow__edge-path {
 
   font-family: 'Roboto';
   color: black;
-  font-weight: 400;
+  font-weight: 500;
+  text-align: left;
 
 }
 .node-summary {
@@ -212,17 +231,12 @@ path.react-flow__edge-path {
   background-color: white !important;
 }
 
-.node:hover {
-  cursor: pointer;
+
+.logo0-img {
+  width: 55px;
+  height: auto;
 }
-
-.canvas-hide {
-  display: none;
-  opacity: 0;
-}
-
-.canvas-show {
-  display: block;
-  opacity: 1;
-
+.logo1-img {
+  width: 170px;
+  height: auto;
 }
