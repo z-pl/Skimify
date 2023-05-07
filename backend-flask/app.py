@@ -77,3 +77,7 @@ def create_app(db_url=None):
 
 
     return app
+
+
+#ewjwkrlkwejlkjrlwjrelkjrlkjljjljljljljljljljljljlkjlk
+#ewjwkrlkwejlkjrlwjrelkjrlkjljjljljljljljljljljljlkjlk@gmail.com

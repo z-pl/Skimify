@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 class CanvasStore {
   showCanvas = false;
   firstNodeText = "";
+  bottomRef = null;
 
   nodesToAdd = [];
   nodesOffset = 1;
@@ -19,6 +20,9 @@ class CanvasStore {
     this.firstNodeText = value;
   }
 
+  setBottomRef(ref: React.RefObject<HTMLDivElement> | null): void {
+    this.bottomRef = ref;
+  }
   setNodesToAdd(data) {
     this.nodesToAdd = data;
   }

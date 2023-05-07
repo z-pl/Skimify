@@ -36,13 +36,19 @@ export default function RestartCanvas(props : ResetCanvasProps)
   const clearCanvas = () => {
 
     setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }, 10);
+      canvasStore.bottomRef.current.scrollIntoView({      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',})
+    }, 0);
+
     props.resetGraph();
-    canvasStore.setShowCanvas();
+
+
+    setTimeout(() => {
+
+      canvasStore.setShowCanvas();
+    }, 1000);
+
 
 
   }

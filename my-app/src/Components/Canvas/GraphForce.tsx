@@ -50,7 +50,7 @@ const getFirstNode = () => {
   const firstNode: Node = {
     id: '1',
     position: { x: -10, y: -150 },
-    data: { label: <SkimifyNode text={"biology, study of living things and their vital processes. The field deals with all the physicochemical aspects of life. The modern tendency toward cross-disciplinary research and the unification of scientific knowledge and investigation from different fields has resulted in significant overlap of the field of biology with other scientific disciplines. Modern principles of other fields—chemistry, medicine, and physics, for example—are integrated with those of biology in areas such as biochemistry, biomedicine, and biophysics." }/> },//canvasStore.firstNodeText
+    data: { label: <SkimifyNode text={canvasStore.firstNodeText }/> },//
     className: "node node-summary",
   }
   return [firstNode];

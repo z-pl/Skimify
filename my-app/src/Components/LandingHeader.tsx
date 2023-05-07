@@ -1,11 +1,21 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Typewriter } from 'react-simple-typewriter'
-import textAreaStore from "../mobx/stores/UserInputText";
+import canvasStore from "../mobx/stores/CanvasStore";
 import { observer } from "mobx-react-lite";
 
 export function LandingHeader() {
 
   const [showSkimifyTool, setShowSkimifyTool] = useState(false);
+
+
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+
+
+  useEffect(() => {
+    canvasStore.setBottomRef(bottomRef);
+  }, []);
+
 
 
   function toggleSkimifyTool() {
@@ -17,7 +27,7 @@ export function LandingHeader() {
   }
 
     return (
-    <div className="p-2  flex flex-col items-center gap-6">
+    <div ref = {bottomRef} className="p-2  flex flex-col items-center gap-6">
       <div className=" font-roboto landing-header-text text-7xl break-words font-bold  w-6/12 text-center">
         Simplify your {'  '}
         {

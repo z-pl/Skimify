@@ -17,7 +17,7 @@ export default function SkimifyNode(props) {
             cursor={hideCursor}
             onLoopDone={disableCursor}
             cursorStyle='|'
-            typeSpeed={15}
+            typeSpeed={5}
             delaySpeed={1000}
             />
         }
