@@ -22,14 +22,18 @@ export function NavItems() {
       {!userLoggedIn ? ( // TODO: change
         <>
           <li>
-            <button className="nav-item  border-black border-2 py-1 px-2 rounded-lg text-sm font-medium">
-            <Link to={"/create-account"}>Sign Up</Link>
-            </button>
+            <Link to={"/create-account"}>
+              <button className="nav-item  border-black border-2 py-1 px-2 rounded-lg text-sm font-medium">
+                Sign Up
+              </button>
+            </Link>
           </li>
           <li>
-            <button className="nav-item  border-black border-2 py-1 px-2 rounded-lg text-sm font-medium">
-                <Link to={"/login"}>Log In</Link>
-              </button>
+            <Link to={"/login"}>
+                <button className="nav-item  border-black border-2 py-1 px-2 rounded-lg text-sm font-medium">
+                  Log In
+                </button>
+              </Link>
           </li>
         </>
       ) : (
