@@ -23,14 +23,14 @@ export function NavItems() {
         <>
           <li>
             <Link to={"/create-account"}>
-              <button className="nav-item  border-black border-2 py-1 px-2 rounded-lg text-sm font-medium">
+              <button className="hidden sm:block nav-item  border-black border-2 py-1 px-2 rounded-lg text-sm font-medium">
                 Sign Up
               </button>
             </Link>
           </li>
           <li>
             <Link to={"/login"}>
-                <button className="nav-item  border-black border-2 py-1 px-2 rounded-lg text-sm font-medium">
+                <button className="hidden sm:block  nav-item  border-black border-2 py-1 px-2 rounded-lg text-sm font-medium">
                   Log In
                 </button>
               </Link>

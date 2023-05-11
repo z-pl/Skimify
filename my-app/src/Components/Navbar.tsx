@@ -11,10 +11,10 @@ export function Navbar() {
 
 
   return (
-    
+
     <nav className="flex justify-between content-end p-4 bg-white">
       <div className= "flex gap-2 w-100">
-        <img className="logo0-img" src={logo0} alt="" />
+        <img className="hidden sm:block logo0-img" src={logo0} alt="" />
         <img className="logo1-img" src={logo1} alt="" />
         {/* <img className="main-logo" src={logo} alt="" /> */}
       </div>
