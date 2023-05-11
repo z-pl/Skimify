@@ -31,7 +31,7 @@ const Home = observer(() =>  {
     }
     return (
         <div className="Home">
-            <div className="App flex flex-col gap-20">
+            <div className="App flex flex-col gap-10">
             {/* <button onClick={handleClikc}>test</button> */}
              <Navbar></Navbar>
              <MainBody></MainBody>

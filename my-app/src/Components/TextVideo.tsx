@@ -50,7 +50,7 @@ export const TextVideo = observer(() => {
 
   return (
     <div className="flex flex-col items-center space-y-5 mt-3">
-      
+
       <div className="bg-gray-100 rounded-md shadow-md">
         <ul className="flex">
           {tabs.map((item) => (
@@ -82,7 +82,7 @@ export const TextVideo = observer(() => {
         <textarea
           rows={15}
           className="w-full px-4 py-2 text-lg bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 h-96 min-w-full min-h-[10rem]"
-          placeholder="Enter your lecture transcript here..."
+          placeholder="Enter your notes here..."
           value={textAreaStore.textValue}
           onChange={handleTextareaChange}
         ></textarea>
@@ -92,7 +92,7 @@ export const TextVideo = observer(() => {
       </div>
     ) : (
         <div className="mt-8 w-10/12 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center h-96">
-          <p className="text-gray-500 text-lg">Drag a file...</p>
+          <p className="text-gray-500 text-3xl">Coming Soon...</p>
         </div>
       )}
 
@@ -110,6 +110,3 @@ export const TextVideo = observer(() => {
     </div>
   );
 });
-
-
-

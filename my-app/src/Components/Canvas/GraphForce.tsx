@@ -43,7 +43,6 @@ type ExampleProps = {
 
 const nodeOrigin: NodeOrigin = [0.5, 0.5];
 const defaultEdgeOptions = { style: { stroke: '#09090b', strokeWidth: 3 } };
-const emojis = ['random5random5random5random5random5random5random5random5random5random5random5random5'];
 
 const getFirstNode = () => {
   //console.log("test: ", canvasStore.firstNodeText)
