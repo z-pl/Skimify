@@ -27,12 +27,12 @@ export function LandingHeader() {
   }
 
     return (
-    <div ref = {bottomRef} className="p-2  flex flex-col items-center gap-6">
-      <div className=" font-roboto landing-header-text text-7xl break-words font-bold  w-6/12 text-center">
+    <div ref = {bottomRef} className="m-1 flex flex-col items-center gap-6">
+      <div className=" font-roboto landing-header-text text-7xl h-40 break-words font-bold  w-8/12 text-center">
         Simplify your {'  '}
         {
           <Typewriter
-            words={[' lecture notes', 'videos', 'lecture notes and videos.']}
+            words={['notes into a mind map']}
             loop={1}
             cursor
             cursorStyle='_'
@@ -43,8 +43,8 @@ export function LandingHeader() {
         }
       </div>
 
-      <div className="landing-subheader-text text-xl w-4/12 text-center">
-        Skimify is an AI tool that enables students to summarize their lecture videos and notes.
+      <div className="landing-subheader-text text-xl w-6/12 text-center">
+        Skimify is an AI tool that untanlges your notes & embodies first principle learning.
       </div>
 
     </div>
