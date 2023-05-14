@@ -10,14 +10,20 @@ from cache import cache
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
+POSTGRES_USER = os.environ['POSTGRES_USER']
+POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
+POSTGRES_DB = os.environ['POSTGRES_DB']
+POSTGRES_HOST = os.environ['POSTGRES_HOST']
+POSTGRES_PORT = os.environ['POSTGRES_PORT']
 
 def create_app(db_url=None):
 
     ACCESS_EXPIRES = timedelta(hours=1)
 
     app = Flask(__name__)
-    load_dotenv()
 
+    load_dotenv()
+    # db_url = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
     CORS(app)
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = "Skimify API"
@@ -78,6 +84,12 @@ def create_app(db_url=None):
 
     return app
 
+
+# if __name__ == '__main__':
+#     create_app = create_app()
+#     create_app.run()
+# else:
+#     gunicorn_app = create_app()
 
 #ewjwkrlkwejlkjrlwjrelkjrlkjljjljljljljljljljljljlkjlk
 #ewjwkrlkwejlkjrlwjrelkjrlkjljjljljljljljljljljljlkjlk@gmail.com

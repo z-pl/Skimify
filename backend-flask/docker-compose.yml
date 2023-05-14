@@ -1,0 +1,32 @@
+version: '3'
+services:
+  web:
+    build: ./
+    environment:
+      - POSTGRES_USER=value
+      - POSTGRES_PASSWORD=value
+      - POSTGRES_DB=value
+      - POSTGRES_HOST=db
+      - POSTGRES_POST=5432
+    ports:
+      - "80:80"
+    links:
+      - redis
+      - db
+
+  redis:
+    image: redis:6.2.12
+    ports:
+      - "6379:6379"
+  db:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_USER=value
+      - POSTGRES_PASSWORD=value
+      - POSTGRES_DB=value
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+volumes:
+  postgres_data:
