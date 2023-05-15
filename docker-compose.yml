@@ -6,9 +6,3 @@ services:
     container_name: api
     ports:
       - "5001:80"
-  ui:
-    build:
-      context: ./my-app
-    container_name: ui
-    ports:
-      - "3000:3000"

@@ -1,0 +1,30 @@
+name: Deploy Backend to AWS Elastic Beanstalk
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend-flask
+      steps:
+        - name: Checkout source code
+          uses: actions/checkout@v2
+
+        - name: Generate deployment package
+
+          run: zip -r deploy.zip . -x '*.git*'
+
+        - name: Deploy to EB
+          uses: einaregilsson/beanstalk-deploy@v21
+          with:
+            aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            application_name: skim-final2
+            environment_name: Skim-final2-env
+            version_label: ${{ github.sha }}
+            existing_bucket_name: elasticbeanstalk-ap-southeast-2-143184831020
+            region: ap-southeast-2
+            deployment_package: deploy.zip
