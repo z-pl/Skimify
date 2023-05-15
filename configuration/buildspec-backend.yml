@@ -3,7 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - cd backend-flask
       - echo Zipping project folder...
       - zip -r project.zip backend-flask/*
   build:
