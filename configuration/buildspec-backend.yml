@@ -3,9 +3,17 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Zipping project folder...
       - cd backend-flask
-      - zip -r backend-skimify.zip . -x "scripts/*"
+      - echo Zipping project folder...
+      - zip -r project.zip backend-flask/*
+  build:
+    commands:
+      - echo Removing existing deployment directory...
+      - rm -rf deployment
+      - echo Creating deployment directory...
+      - mkdir deployment
+      - echo Moving ZIP file to deployment directory...
+      - mv project.zip deployment/
 artifacts:
   files:
-    - backend-skimify.zip
+    - deployment/**
