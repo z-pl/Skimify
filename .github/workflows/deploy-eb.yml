@@ -6,18 +6,15 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend-flask
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Generate deployment package
+        run: cd backend-flask
         run: zip -r deploy.zip . -x '*.git*'
 
       - name: Deploy to EB
-        working-directory: ./backend-flask
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
