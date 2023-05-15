@@ -11,3 +11,4 @@ openai
 flask-cors
 tiktoken
 psycopg2
+gunicorn
