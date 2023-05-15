@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - echo Zipping project folder...
-      - zip -r deployment.zip backend-flask*
+      - zip -r deployment.zip backend-flask/*
 artifacts:
   files:
     - deployment.zip
