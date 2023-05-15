@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate deployment package
-        run: cd .. && zip -r deploy-v4.zip backend-flask -x '*.git*'
+        run: zip -r deploy-v4.zip backend-flask -x '*.git*'
 
       - name: View package
         run: cat deploy-v4.zip
