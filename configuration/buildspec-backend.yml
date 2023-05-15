@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Zipping project folder...
+      - zip -r project.zip backend-flask/*
+  build:
+    commands:
+      - echo Moving ZIP file to deployment directory...
+      - mv project.zip deployment/
+artifacts:
+  files:
+    - deployment/**
