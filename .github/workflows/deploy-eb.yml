@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate deployment package
-        run: zip -r deploy-v2.zip backend-flask -x '*.git*'
+        run: zip -r deploy-v3.zip backend-flask -x '*.git*'
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
@@ -20,7 +20,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: skim-final2
           environment_name: Skim-final2-env
-          version_label: { { github.sha } }
+          version_label: ${{ github.sha }}
           existing_bucket_name: elasticbeanstalk-ap-southeast-2-143184831020
           region: ap-southeast-2
-          deployment_package: deploy-v2.zip
+          deployment_package: deploy-v3.zip
