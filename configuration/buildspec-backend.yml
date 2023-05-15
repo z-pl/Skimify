@@ -7,12 +7,9 @@ phases:
       - zip -r project.zip backend-flask/*
   build:
     commands:
-      - echo Removing existing deployment directory...
-      - rm -rf deployment
-      - echo Creating deployment directory...
-      - mkdir deployment
-      - echo Moving ZIP file to deployment directory...
-      - mv project.zip deployment/
+  postbuild:
+    commands:
+
 artifacts:
   files:
-    - deployment/**
+    - project.zip
