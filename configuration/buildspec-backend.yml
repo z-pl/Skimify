@@ -5,11 +5,6 @@ phases:
     commands:
       - echo Zipping project folder...
       - zip -r project.zip backend-flask/*
-  build:
-    commands:
-  postbuild:
-    commands:
-
 artifacts:
   files:
     - project.zip
