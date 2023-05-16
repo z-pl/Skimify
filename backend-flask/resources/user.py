@@ -72,7 +72,7 @@ class Users(MethodView):
     @blp.response(200, UserSchema(many=True))
     def get(self):
         #return UserModel.query.all()
-        return {"message": "User tes32 here"}
+        return {"message": "User tes42 here"}
 
     @jwt_required()
     def post(self):
