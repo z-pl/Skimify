@@ -71,8 +71,7 @@ class UserLogout(MethodView):
 class Users(MethodView):
     @blp.response(200, UserSchema(many=True))
     def get(self):
-        #return UserModel.query.all()
-        return {"message": "User tes42 here"}
+        return UserModel.query.all()
 
     @jwt_required()
     def post(self):
