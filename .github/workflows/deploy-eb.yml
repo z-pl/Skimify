@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate deployment package
-        run: cd backend-flask; zip -r deploy-v7.zip . -x "scripts/*"
+        run: cd backend-flask; zip -r deploy-v7.zip . -x "scripts/*"; mv ./deploy-v7.zip ..
 
       - name: View package
         run: zipinfo -1 deploy-v7.zip
