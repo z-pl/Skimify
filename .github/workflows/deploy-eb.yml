@@ -21,9 +21,9 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: skim-final2
-          environment_name: Skim-final2-env
+          application_name: skimify-backend
+          environment_name: Skimify-backend-env
           version_label: ${{ github.sha }}
-          existing_bucket_name: elasticbeanstalk-ap-southeast-2-143184831020
+          existing_bucket_name: ${{ secrets.BUCKET_NAME }}
           region: ap-southeast-2
           deployment_package: deploy.zip
