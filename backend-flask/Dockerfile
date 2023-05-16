@@ -1,7 +1,7 @@
-FROM python:3.10
+FROM python:3.10.4
 EXPOSE 80
 WORKDIR /app
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir --upgrade -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 COPY . .
-CMD ["python3", "-m", "gunicorn", "--bind", "0.0.0.0:80", "app:create_app()"]
+CMD ["gunicorn", "-b", "0.0.0.0:80", "app:create_app()"]

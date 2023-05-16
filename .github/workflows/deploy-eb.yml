@@ -14,7 +14,7 @@ jobs:
         run: cd backend-flask; zip ../deploy-v5.zip *;
 
       - name: View package
-        run: ls -a deploy-v5.zip
+        run: zipinfo -1 myzipfile.zip
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
