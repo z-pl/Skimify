@@ -11,21 +11,21 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 
-def create_app(db_url=None):
+def create_app():
 
     ACCESS_EXPIRES = timedelta(hours=1)
 
     app = Flask(__name__)
 
     load_dotenv()
-    db_url = os.environ.get('DB_URL')
+    db_url = os.getenv('DB_URL')
     CORS(app)
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = "Skimify API"
     app.config["API_VERSION"] = "v1"
     app.config["OPENAPI_VERSION"] = "3.0.3"
     app.config["OPENAPI_URL_PREFIX"] = "/"
-    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DB_URL", "sqlite:///data.db")
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PROPAGATE_EXCEPTIONS"] = True
 
