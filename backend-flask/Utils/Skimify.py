@@ -42,7 +42,7 @@ class SkimifyTool():
         dotpoint_conversion = ""
 
         completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[
                 {
                     "role": "user",
@@ -88,7 +88,7 @@ class SkimifyTool():
             firstIterationFlag = False
 
             completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[
                 {
                     "role": "user",
@@ -108,7 +108,7 @@ class SkimifyTool():
         for i in range(1, len(chunks)):
 
             completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[
                 {
                     "role": "user",
@@ -123,7 +123,7 @@ class SkimifyTool():
 
 
         completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=[
             {
                 "role": "user",

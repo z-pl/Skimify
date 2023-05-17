@@ -4,7 +4,7 @@ import tiktoken
 
 def tokenize(text):
     encoding = tiktoken.get_encoding("cl100k_base")
-    encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
+    encoding = tiktoken.encoding_for_model("gpt-4")
     
     tokenversion = [encoding.decode_single_token_bytes(token) for token in encoding.encode(text)]
     for i, item in enumerate(tokenversion):
