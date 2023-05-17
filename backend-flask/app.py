@@ -10,11 +10,6 @@ from cache import cache
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
-POSTGRES_USER = os.getenv('POSTGRES_USER') or ""
-POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD') or ""
-POSTGRES_DB = os.getenv('POSTGRES_DB') or ""
-POSTGRES_HOST = os.getenv('POSTGRES_HOST') or ""
-POSTGRES_PORT = os.getenv('POSTGRES_PORT')  or ""
 
 def create_app(db_url=None):
 
@@ -23,7 +18,7 @@ def create_app(db_url=None):
     app = Flask(__name__)
 
     load_dotenv()
-    # db_url = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}'
+    db_url = os.environ.get('DB_URL')
     CORS(app)
     app.config["PROPAGATE_EXCEPTIONS"] = True
     app.config["API_TITLE"] = "Skimify API"
