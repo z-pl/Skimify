@@ -16,7 +16,7 @@ const Home = observer(() =>  {
       console.log(event)
 
       async function getRand() {
-        const res = await axios.post("http://127.0.0.1:5000/users", {
+        const res = await axios.post("https://api.skimify.ai/users", {
         }, {
           headers: {
             Authorization: 'Bearer ' + TokenStore.getToken()

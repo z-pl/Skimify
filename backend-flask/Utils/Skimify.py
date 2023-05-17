@@ -36,8 +36,8 @@ class SkimifyTool():
             Output:
                 "This is an expanded and more descriptive version of key point 1."
         """
-        if len(tokenize(dotpoint)) > 1500:
-            return None
+        if len(tokenize(dotpoint)) > 1000:
+            return "Input was too long, please only interact with this application though skimify.ai"
 
         dotpoint_conversion = ""
 
@@ -75,6 +75,8 @@ class SkimifyTool():
                     "@dp Key point 3",
                 ]
         """
+        if len(tokenize(text)) >= 1000:
+            return "@dpText input was too long. Please reduce input size and try again"
 
         chunks = split_into_chunks(text, 3000)
 
