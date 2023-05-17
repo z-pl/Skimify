@@ -33,7 +33,7 @@ def create_app():
     migrate = Migrate(app, db)
     api = Api(app)
 
-    app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET") # MUST CHANGE LATER TESTING PURPOSES
+    app.config["JWT_SECRET_KEY"] = os.getenv("JWT_KEY")
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = ACCESS_EXPIRES
 
     jwt = JWTManager(app)
