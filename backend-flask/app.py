@@ -85,6 +85,3 @@ def create_app():
 #     create_app.run()
 # else:
 #     gunicorn_app = create_app()
-
-#ewjwkrlkwejlkjrlwjrelkjrlkjljjljljljljljljljljljlkjlk
-#ewjwkrlkwejlkjrlwjrelkjrlkjljjljljljljljljljljljlkjlk@gmail.com
