@@ -6,12 +6,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
 
       - name: Generate deployment package
-        run: cd backend-flask; zip -r deploy.zip . -x "scripts/*"; mv ./deploy.zip ..
+        run: cd backend-flask; zip -r deploy.zip . -x "scripts/*"; mv ./deploy.zip ..; echo ${{ github.event.workflow_run.conclusion == 'success' }}
 
       - name: View package
         run: zipinfo -1 deploy.zip
