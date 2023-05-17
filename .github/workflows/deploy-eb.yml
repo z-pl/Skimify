@@ -7,7 +7,6 @@ on:
 
 jobs:
   deploy_frontend:
-    needs: deploy_backend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,6 +35,7 @@ jobs:
 
 
   deploy_backend:
+    needs: deploy_frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
@@ -58,5 +58,4 @@ jobs:
           existing_bucket_name: ${{ secrets.BUCKET_NAME }}
           region: ap-southeast-2
           deployment_package: deploy.zip
-
 
