@@ -3,7 +3,6 @@ import SkimifyNode from './SkimifyNode';
 import textAreaStore from "../../mobx/stores/UserInputText";
 import canvasStore from '../../mobx/stores/CanvasStore';
 
-const text = ""
 export const initialNodes: Node[] = [
   {
     id: '1',
