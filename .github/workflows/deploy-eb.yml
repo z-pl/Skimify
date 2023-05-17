@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           cd my-app
-          npm install
+          npm ci
           npm run build
 
       - name: Configure AWS credentials
