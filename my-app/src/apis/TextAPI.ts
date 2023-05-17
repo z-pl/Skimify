@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const apiUrls = {
-  summaryUrl: "http://127.0.0.1:5000/skimify/text/summary",
-  dotpointExtendUrl: "http://127.0.0.1:5000/skimify/text/dotpoint",
-  test: "http://127.0.0.1:5000/users"
+  summaryUrl: "https://api.skimify.ai/skimify/text/summary",
+  dotpointExtendUrl: "https://api.skimify.ai/skimify/text/dotpoint",
+  test: "https://api.skimify.ai/users"
 }
 
 const getSummary = async (inputText) => {

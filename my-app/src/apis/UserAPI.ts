@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const apiUrls = {
-  registerUser: "http://127.0.0.1:5000/register",
-  loginUser: "http://127.0.0.1:5000/login",
-  logoutUser: "http://127.0.0.1:5000/logout",
-  refresh: "http://127.0.0.1:5000/refresh"
+  registerUser: "https://api.skimify.ai/register",
+  loginUser: "https://api.skimify.ai/login",
+  logoutUser: "https://api.skimify.ai/logout",
+  refresh: "https://api.skimify.ai/refresh"
 }
 
 
