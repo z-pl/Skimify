@@ -71,7 +71,6 @@ class UserLogout(MethodView):
 class Users(MethodView):
     @blp.response(200)
     def get(self):
-        cache.set("test3", "Im here")
         return {"message": "Hello Fellow User"}, 201
 
     @jwt_required()
