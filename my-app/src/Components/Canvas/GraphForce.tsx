@@ -50,7 +50,7 @@ const getFirstNode = () => {
     id: '1',
     position: { x: -10, y: -150 },
     data: { label: <SkimifyNode text={canvasStore.firstNodeText }/> },//
-    className: "node node-summary",
+    className: "node-start node node-summary",
   }
   return [firstNode];
 }
@@ -86,6 +86,22 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
       );
     }, [setNodes]
   );
+
+  const replaceNodeClass = useCallback(
+    (id, className, newClassName) => {
+      setNodes((nds) =>
+        nds.map((node) => {
+          if (node.id === id) {
+            node = {
+              ...node,
+              className:  node.className.replace(className, newClassName)
+            };
+          }
+          return node;
+        })
+      );
+    }, [setNodes]
+  );
   const onNodeClick = useCallback(
     (evt, node) => {
       //console.table("node: ", node)
@@ -96,15 +112,14 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
       const nodesToAdd = canvasStore.nodesToAdd;
 
       for (let i = 0; i < nodesToAdd.length; i++) {
-        const parentClass = node.className.split(" ")[1];
-        console.log(parentClass);
+        const parentClass = node.className.split(" ").at(-1);
         const classExt = parentClass === "node-summary" ? "node-dotpoint" : "node-summary";
         const childId = `${ canvasStore.nodesOffset+(i+1)}`;
         const childNode = {
           id: childId,
           position: { x: node.position.x + (randomCoordSign() * getRandomInt(100,200)), y: node.position.y + (randomCoordSign() * getRandomInt(100,200))},
           data: { label: <SkimifyNode text={nodesToAdd[i]}/>},
-          className: "node " + classExt,
+          className: "node-start node " + classExt,
         };
 
         const childEdge = { id: `${node.id}->${childId}`, source: node.id, target: childId };
@@ -122,23 +137,24 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
 
       const parentClass = node.className.split(" ").at(-1);
       const apiType = parentClass === "node-summary" ? getSummary : getDotPoints;
-      toggleNodeClass(node.id,"loading")
+      // toggleNodeClass(node.id,"loading")
+
       const text = node.data.label.props.text;
 
-      let res = null;
+
       try {
-        res = await apiType(text);
-        toggleNodeClass(node.id, "loading")
+        replaceNodeClass(node.id, "node-start", "loading")
+        const res = await apiType(text);
+        replaceNodeClass(node.id, "loading", "node-start")
+        const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
+        canvasStore.setNodesToAdd(data);
+        onNodeClick(evt, node);
 
       } catch(err) {
-        toggleNodeClass(node.id, "loading");
-        toggleNodeClass(node.id, "loading-error");
-      }
+        replaceNodeClass(node.id, "loading", "loading-error")
+     }
 
-      const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
-      console.log("data: ", data)
-      canvasStore.setNodesToAdd(data);
-      onNodeClick(evt, node);
+
     },
     [toggleNodeClass,onNodeClick]
   )
