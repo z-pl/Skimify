@@ -69,7 +69,7 @@ class UserLogout(MethodView):
 
 @blp.route("/users")
 class Users(MethodView):
-    @blp.response(200, UserSchema(many=True))
+    @blp.response(200)
     def get(self):
         return {"message": "Hello Fellow User"}, 201
 
