@@ -88,7 +88,7 @@ class SkimifyTool():
             firstIterationFlag = False
 
             completion = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
                 {
                     "role": "user",
@@ -108,7 +108,7 @@ class SkimifyTool():
         for i in range(1, len(chunks)):
 
             completion = openai.ChatCompletion.create(
-            model="gpt-4",
+            model="gpt-3.5-turbo",
             messages=[
                 {
                     "role": "user",
