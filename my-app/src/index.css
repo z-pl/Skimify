@@ -4,6 +4,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --color1: #e5b3df;
+  --color2: #d1a5fe;
+  --color3: #f44324;
+  --color4: #1fd1bc;
+  --color5: #e822d1;
+  --color6: #d1a5fe;
+  --color7: #e5b3df;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -69,6 +80,58 @@ code {
     left: 0px;
   }
 }
+.main-body::before {
+  border-radius: 100%;
+  content: "";
+  display: block;
+  height: 100%;
+}
+
+.main-body::before {
+  filter: blur(40px);
+
+  animation-name: switchMood;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  transition-timing-function: ease;
+  transition-property: transform;
+  transform: rotate(360deg);
+
+  background: linear-gradient(-330deg, #e5b3df, #d1a5fe, #f44324,
+                              #1fd1bc,  #e822d1, #d1a5fe, #e5b3df);
+  background-size: 1400% 1400%;
+  box-shadow: inset 0 0 10vh rgba(0,0,0,.4);
+}
+
+#canvas {
+  width: 50%;
+  height: 50%;
+  display: block;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  z-index: -9999;
+
+  filter: blur(40px);
+  border-radius: 50%;
+  animation-name: switchMood;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  transition-timing-function: ease;
+  transition-property: transform;
+  transform: rotate(360deg);
+
+  background: linear-gradient(-330deg, #e5b3df, #d1a5fe, #f44324,
+                              #1fd1bc,  #e822d1, #d1a5fe, #e5b3df);
+  background-size: 1400% 1400%;
+  box-shadow: inset 0 0 10vh rgba(0,0,0,.4);
+}
+
+@keyframes switchMood {
+  from {background-position: 40% 0%;}
+  50% {background-position: 60% 100%;}
+  to {background-position: 40% 0%;}
+}
 
 .landing-header-text {
   color:#FFF4F7 ;
@@ -76,6 +139,8 @@ code {
   -webkit-text-stroke: 2px black;
 
 }
+
+
 
 .landing-subheader-text {
   font-weight: 500;
@@ -116,13 +181,47 @@ path.react-flow__edge-path {
   border-radius: 5px;
   padding: 0.1rem 1.2rem;
   animation: shiftButtonUp 0.1s ease-in-out;
-  position: relative;
 }
 
 .skim-it-btn:hover {
   animation: shiftButtonDown 0.1s ease-in-out;
   animation-fill-mode: forwards;
 }
+
+
+.text-video {
+  box-shadow: 0px 4px 16px rgba(17,17,26,0.1), 0px 8px 24px rgba(17,17,26,0.1), 0px 16px 56px rgba(17,17,26,0.1);
+  border-radius: 0.4rem;
+  background-color: rgba(255, 255, 255, 0.907);
+  animation: revertBorderRadius 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.text-video:focus {
+  animation: borderRadius 0.2s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes borderRadius {
+  from {
+    border-radius: 0.4rem;
+  }
+
+  to {
+    border-radius: 1.2rem;
+  }
+}
+
+@keyframes revertBorderRadius {
+  from {
+    border-radius: 1.2rem;
+  }
+
+  to {
+    border-radius: 0.4rem;
+  }
+}
+
 
 .restart-canvas-btn {
   background-color:#ffffff;
@@ -243,4 +342,45 @@ path.react-flow__edge-path {
 .logo1-img {
   width: 170px;
   height: auto;
+}
+
+
+/* <------------ First Node Click -------------> */
+.box {
+
+}
+.box span{
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-bottom: 3px solid black;
+  border-right: 3px solid black;
+  transform: rotate(45deg);
+  margin: -10px;
+  animation: animate 1s infinite;
+}
+
+.box span:nth-child(2)
+{
+  animation-delay: -0.2s;
+}
+
+.box span:nth-child(3)
+{
+  animation-delay: -0.4s;
+}
+
+@keyframes animate{
+
+  0%{
+    opacity: 0;
+    transform: rotate(45deg) translate(-5px, -5px);
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    transform: rotate(45deg) translate(5px, 5px);
+  }
 }

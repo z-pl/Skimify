@@ -4,9 +4,9 @@ class CanvasStore {
   showCanvas = false;
   firstNodeText = "";
   bottomRef = null;
-
   nodesToAdd = [];
   nodesOffset = 1;
+  firstTimeVisit = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -28,6 +28,10 @@ class CanvasStore {
   }
   setNodesOffet(val) {
     this.nodesOffset += val;
+  }
+
+  setFirstTimeVisit(val) {
+    this.firstTimeVisit = val
   }
 }
 

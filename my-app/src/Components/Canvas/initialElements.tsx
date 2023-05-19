@@ -1,5 +1,5 @@
 import { Edge, Node } from 'reactflow';
-import SkimifyNode from './SkimifyNode';
+import {SkimifyNode} from './SkimifyNode';
 import textAreaStore from "../../mobx/stores/UserInputText";
 import canvasStore from '../../mobx/stores/CanvasStore';
 
