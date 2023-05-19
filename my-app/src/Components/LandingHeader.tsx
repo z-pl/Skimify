@@ -27,15 +27,15 @@ export function LandingHeader() {
   }
 
     return (
-    <div ref = {bottomRef} className="m-1 flex flex-col items-center gap-6">
-      <div className="text-5xl font-roboto landing-header-text sm:text-7xl  min-h-40 font-bold w-8/12 text-center">
+    <div ref = {bottomRef} className="mx-2 flex flex-col items-center gap-1">
+      <div className="text-5xl font-roboto landing-header-text min-h-40 xl:h-40 lg:h-auto md:h-auto sm:text-7xl font-bold w-8/12 text-center">
         Simplify your {'  '}
         {
           <Typewriter
             words={['notes into a mind map']}
             loop={1}
             cursor
-            cursorStyle='_'
+            cursorStyle='|'
             typeSpeed={100}
             deleteSpeed={50}
             delaySpeed={1000}
@@ -43,7 +43,7 @@ export function LandingHeader() {
         }
       </div>
 
-      <div className="text-lg landing-subheader-text md: sm:text-xl w-6/12 text-center">
+      <div className="text-lg landing-subheader-text sm:text-xl w-6/12 text-center">
         Skimify is an AI tool that untanlges your notes & embodies first principle learning!
       </div>
 

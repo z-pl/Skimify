@@ -16,7 +16,7 @@ export default function RestartCanvas(props : ResetCanvasProps)
     expanded: {
       borderRadius: "50px",
       padding: "0.4rem 0.4rem",
-      width: 150,
+      width: 100,
       transition: {
         duration: 0.2,
       },
@@ -36,13 +36,10 @@ export default function RestartCanvas(props : ResetCanvasProps)
   const clearCanvas = () => {
 
     setTimeout(() => {
-      canvasStore.bottomRef.current.scrollIntoView({      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',})
+      window.scrollTo({ top: 12, behavior: "smooth" });
     }, 0);
 
     props.resetGraph();
-
 
     setTimeout(() => {
 
@@ -75,7 +72,7 @@ export default function RestartCanvas(props : ResetCanvasProps)
               animate={{opacity: 1}}
               transition={{delay: 0.2, duration: 0.25}}
             >
-            New Canvas
+            Reset
 
             </motion.span>
           )}

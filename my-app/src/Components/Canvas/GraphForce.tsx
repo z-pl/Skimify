@@ -26,9 +26,10 @@ import 'reactflow/dist/style.css';
 import useForceLayout from './useForceLayout';
 import { initialNodes, initialEdges } from './initialElements';
 
-import SkimifyNode  from './SkimifyNode';
+import { SkimifyNode } from './SkimifyNode';
 import { getSummary, getDotPoints } from '../../apis/TextAPI';
 import RestartCanvas from './RestartCanvas';
+import FirstNodeClick from './FirstNodeClick';
 
 const proOptions: ProOptions = { account: 'paid-pro', hideAttribution: true };
 
@@ -48,7 +49,7 @@ const getFirstNode = () => {
   //console.log("test: ", canvasStore.firstNodeText)
   const firstNode: Node = {
     id: '1',
-    position: { x: -10, y: -150 },
+    position: { x: -30, y: -150 },
     data: { label: <SkimifyNode text={canvasStore.firstNodeText }/> },//
     className: "node-start node node-summary",
   }
@@ -67,7 +68,7 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
   // const { project } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(getFirstNode());
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  // const [nodesToAdd, setNodesToAdd] = useState([]);
+  const [nodeClickable, setNodeClickable] = useState(true);
 
   useForceLayout({ strength, distance });
 
@@ -137,11 +138,11 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
 
       const parentClass = node.className.split(" ").at(-1);
       const apiType = parentClass === "node-summary" ? getSummary : getDotPoints;
-      // toggleNodeClass(node.id,"loading")
-
       const text = node.data.label.props.text;
 
+      canvasStore.firstTimeVisit && canvasStore.setFirstTimeVisit(false)
 
+      setNodeClickable(false);
       try {
         replaceNodeClass(node.id, "node-start", "loading")
         const res = await apiType(text);
@@ -149,14 +150,12 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
         const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
         canvasStore.setNodesToAdd(data);
         onNodeClick(evt, node);
-
+        setNodeClickable(true);
       } catch(err) {
         replaceNodeClass(node.id, "loading", "loading-error")
      }
-
-
     },
-    [toggleNodeClass,onNodeClick]
+    [onNodeClick, replaceNodeClass]
   )
   const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
@@ -173,7 +172,7 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
         proOptions={proOptions}
         onConnect={onConnect}
         nodeOrigin={nodeOrigin}
-        onNodeClick={createNodes}
+        onNodeClick={nodeClickable ? createNodes : ()=>{}}
         defaultEdgeOptions={defaultEdgeOptions}
         minZoom={0.3}
         elementsSelectable={false}
