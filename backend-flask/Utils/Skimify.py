@@ -56,8 +56,7 @@ class SkimifyTool():
 
 
     def textToDotpoint(self, text) -> list:
-
-        dotpoints = ""
+        
 
         completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -70,9 +69,8 @@ class SkimifyTool():
     )
 
         data = completion.choices[0].message.content
-        dotpoints += (data)
 
 
         
 
-        return dotpoints
+        return data
