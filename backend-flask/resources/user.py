@@ -20,7 +20,8 @@ class UserRegister(MethodView):
         new_user = UserModel(
             username = user_data["username"],
             password = pbkdf2_sha256.hash(user_data["password"]),
-            email = user_data["email"]
+            email = user_data["email"].lower()
+            
         )
 
         try:

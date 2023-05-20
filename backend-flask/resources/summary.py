@@ -38,6 +38,8 @@ class SkimifyTextSummary(MethodView):
 
             data = [i.replace('\n','') for i in data]
             data = [i.replace(' - ','') for i in data]
+            data = [i.replace(': ','') for i in data]
+
 
 
             return jsonify({"dotpoints": data})

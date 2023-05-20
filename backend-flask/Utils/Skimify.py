@@ -56,82 +56,23 @@ class SkimifyTool():
 
 
     def textToDotpoint(self, text) -> list:
-        """Summarize the input text into a list of key dot points using OpenAI GPT-3.5 Turbo.
-
-        Args:
-            text (str): The input text that needs to be summarized into key dot points.
-
-        Returns:
-            list: A list of strings containing the key dot points extracted from the input text.
-
-        Example:
-            Input:
-                "This is a long text containing several key points."
-
-            Output:
-                [
-                    "@dp Key point 1",
-                    "@dp Key point 2",
-                    "@dp Key point 3",
-                ]
-        """
-        if len(tokenize(text)) >= 1000:
-            return "@dpText input was too long. Please reduce input size and try again"
-
-        chunks = split_into_chunks(text, 3000)
 
         dotpoints = ""
 
-        firstIterationFlag = True
-
-        if firstIterationFlag:
-            firstIterationFlag = False
-
-            completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {
-                    "role": "user",
-                    "content": f'Please summarise only the key points of this text into dotpoints. You must use "@dp" to indicate to the start of all dotpoints in your response. Ensure dotpoints are short: "{chunks[0]}" \
-                        \n Do not repeat yourself'
-                },
-            ], temperature= 0
-        )
-
-            data = completion.choices[0].message.content
-            dotpoints += data
-
-            if len(chunks)==1:
-                return dotpoints
-
-
-        for i in range(1, len(chunks)):
-
-            completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {
-                    "role": "user",
-                    "content": f'Please summarise the key points of this lecture into dotpoints. You must use "@dp" to indicate to the start of all dotpoints in your response: "{chunks[i]}" \n Please use \
-                        this as context for dotpoints which you have already mentioned: "{chunks[i-1]}" \n Do not repeat yourself'
-                }
-            ], temperature = 0
-        )
-
-            data = completion.choices[0].message.content
-            dotpoints += (data)
-
-
         completion = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[
             {
                 "role": "user",
-                "content": f'For a lecture summary, please reduce the amount of dotpoints to three-seven dotpoints by only keeping the major and important dotpoints". The text is: "{dotpoints}" \n Please label all the dotpoints in your output with "@dp"   '
+                "content": f'Based solely in the information with the text, summarise the key points of this text into dotpoints. In your output, label each dotpoint with only "@dp" at the start. The text to apply this to is "{text}"'
             }
         ], temperature = 0
     )
 
-        dotpoints = completion.choices[0].message.content
+        data = completion.choices[0].message.content
+        dotpoints += (data)
+
+
+        
 
         return dotpoints
