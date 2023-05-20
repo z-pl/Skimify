@@ -44,7 +44,7 @@ export function LandingHeader() {
       </div>
 
       <div className="text-lg landing-subheader-text sm:text-xl w-6/12 text-center">
-        Skimify is an AI tool that untanlges your notes & embodies first principle learning!
+        Skimify is an AI tool that untanlges your notes & embodies first principle learning.
       </div>
 
     </div>
