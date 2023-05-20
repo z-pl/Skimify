@@ -2,6 +2,8 @@ import openai
 import os
 from Utils.GPTHelper import split_into_chunks, tokenize
 from dotenv import load_dotenv
+from time import sleep
+import random
 
 
 class SkimifyTool():
@@ -57,6 +59,11 @@ class SkimifyTool():
 
     def textToDotpoint(self, text) -> list:
 
+        if len(text.split(" ")) < 50:
+            sleep(random.randint(100,300)/100)
+
+            return "@dp Please input a larger text to Skimify!"
+
         if len(tokenize(text)) > 2000:
             return "@dp Please reduce input size and try again"
         
@@ -66,7 +73,7 @@ class SkimifyTool():
         messages=[
             {
                 "role": "user",
-                "content": f'Based solely in the information with the text, summarise the key points of this text into dotpoints. In your output, label each dotpoint with only "@dp" at the start. Please create the dotpoints in the same language as the text. If the input is too short, say "Please increase your input size so that it can be Skimified!", please do not create any dotpoints. The text to apply this to is "{text}" '
+                "content": f'Based solely in the information with the text, summarise the key points of this text into dotpoints labelling each dotpoint with only "@dp". The text is "{text}" '
             }
         ], temperature = 0, max_tokens = 500, n =1
     )
