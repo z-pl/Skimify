@@ -68,7 +68,7 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
   // const { project } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(getFirstNode());
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [nodeClickable, setNodeClickable] = useState(true);
+  // const [nodeClickable, setNodeClickable] = useState(true);
 
   useForceLayout({ strength, distance });
 
@@ -136,13 +136,16 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
 
   const createNodes = useCallback (async (evt, node:Node) => {
 
+      if (canvasStore.isNodeClicked(node.id)) return;
+
+      canvasStore.addNodeClick(node.id);
       const parentClass = node.className.split(" ").at(-1);
       const apiType = parentClass === "node-summary" ? getSummary : getDotPoints;
       const text = node.data.label.props.text;
 
       canvasStore.firstTimeVisit && canvasStore.setFirstTimeVisit(false)
 
-      setNodeClickable(false);
+      // setNodeClickable(false);
       try {
         replaceNodeClass(node.id, "node-start", "loading")
         const res = await apiType(text);
@@ -150,7 +153,8 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
         const data =  parentClass === "node-summary" ? res.data.dotpoints : [res.data.summary];
         canvasStore.setNodesToAdd(data);
         onNodeClick(evt, node);
-        setNodeClickable(true);
+        // setNodeClickable(true);
+        canvasStore.removeNodeClick(node.id);
       } catch(err) {
         replaceNodeClass(node.id, "loading", "loading-error")
      }
@@ -172,7 +176,7 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
         proOptions={proOptions}
         onConnect={onConnect}
         nodeOrigin={nodeOrigin}
-        onNodeClick={nodeClickable ? createNodes : ()=>{}}
+        onNodeClick={createNodes}
         defaultEdgeOptions={defaultEdgeOptions}
         minZoom={0.3}
         elementsSelectable={false}

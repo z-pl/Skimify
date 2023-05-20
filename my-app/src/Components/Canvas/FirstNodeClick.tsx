@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 
 export default function FirstNodeClick() {
   return (
-    <div className="absolute bottom-8 left-1/3 mb-2">
+    <div className="absolute -top-28 left-1/3 mb-2">
       <div className="flex flex-col items-center gap-3">
         <motion.div
           className="font-black font-bold text-2xl"
