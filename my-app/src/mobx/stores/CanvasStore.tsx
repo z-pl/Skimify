@@ -7,6 +7,7 @@ class CanvasStore {
   nodesToAdd = [];
   nodesOffset = 1;
   firstTimeVisit = false;
+  nodesClicked = new Set()
 
   constructor() {
     makeAutoObservable(this);
@@ -32,6 +33,18 @@ class CanvasStore {
 
   setFirstTimeVisit(val) {
     this.firstTimeVisit = val
+  }
+
+  addNodeClick(nodeId) {
+    this.nodesClicked.add(nodeId)
+  }
+
+  removeNodeClick(nodeId) {
+    this.nodesClicked.delete(nodeId)
+  }
+
+  isNodeClicked(nodeId) {
+    return this.nodesClicked.has(nodeId)
   }
 }
 
