@@ -56,6 +56,9 @@ class SkimifyTool():
 
 
     def textToDotpoint(self, text) -> list:
+
+        if len(tokenize(text)) > 2000:
+            return "@dp Please reduce input size and try again"
         
 
         completion = openai.ChatCompletion.create(
@@ -63,9 +66,9 @@ class SkimifyTool():
         messages=[
             {
                 "role": "user",
-                "content": f'Based solely in the information with the text, summarise the key points of this text into dotpoints. In your output, label each dotpoint with only "@dp" at the start. The text to apply this to is "{text}"'
+                "content": f'Based solely in the information with the text, summarise the key points of this text into dotpoints. In your output, label each dotpoint with only "@dp" at the start. Please create the dotpoints in the same language as the text. If the input is too short, say "Please increase your input size so that it can be Skimified!", please do not create any dotpoints. The text to apply this to is "{text}" '
             }
-        ], temperature = 0
+        ], temperature = 0, max_tokens = 500, n =1
     )
 
         data = completion.choices[0].message.content
