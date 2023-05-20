@@ -2,8 +2,6 @@ import openai
 import os
 from Utils.GPTHelper import split_into_chunks, tokenize
 from dotenv import load_dotenv
-from time import sleep
-import random
 
 
 class SkimifyTool():
@@ -59,28 +57,22 @@ class SkimifyTool():
 
     def textToDotpoint(self, text) -> list:
 
-        if len(text.split(" ")) < 50:
-            sleep(random.randint(100,300)/100)
-
-            return "@dp Please input a larger text to Skimify!"
-
-        if len(tokenize(text)) > 2000:
-            return "@dp Please reduce input size and try again"
-        
+        dotpoints = ""
 
         completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {
                 "role": "user",
-                "content": f'Based solely in the information with the text, summarise the key points of this text into dotpoints labelling each dotpoint with only "@dp". The text is "{text}" '
+                "content": f'Based solely in the information with the text, summarise the key points of this text into dotpoints. In your output, label each dotpoint with only "@dp" at the start. The text to apply this to is "{text}"'
             }
-        ], temperature = 0, max_tokens = 500, n =1
+        ], temperature = 0
     )
 
         data = completion.choices[0].message.content
+        dotpoints += (data)
 
 
         
 
-        return data
+        return dotpoints
