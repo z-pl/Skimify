@@ -57,7 +57,7 @@ class SkimifyTool():
 
     def textToDotpoint(self, text) -> list:
 
-        if len(text.split(" ")) < 10:
+        if len(text.split(" ")) < 10 and len(text) < 20:
 
             return "@dp Please input a larger text to Skimify!"
 
