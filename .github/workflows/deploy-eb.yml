@@ -33,10 +33,9 @@ jobs:
       - name: Sync build artifacts to S3
         run: aws s3 sync ./my-app/build s3://${{ secrets.AWS_PRODUCTION_BUCKET_NAME }} --delete
 
-
   deploy_backend:
     needs: deploy_frontend
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -58,4 +57,3 @@ jobs:
           existing_bucket_name: ${{ secrets.BUCKET_NAME }}
           region: ap-southeast-2
           deployment_package: deploy.zip
-
