@@ -64,6 +64,12 @@ function getRandomInt(min, max) {
   return  Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+const nodeColor = (node: Node) => {
+  const nodeClass = node.className.includes("node-summary")
+
+  return nodeClass ?  "#D4FFFC" : "#BBC2FF"
+}
+
 const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProps = {}) => {
   // const { project } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(getFirstNode());
@@ -183,7 +189,7 @@ const ReactFlowPro = observer(({ strength = -880, distance = 1100 }: ExampleProp
         defaultViewport={{ x: window.innerWidth / 2, y: window.innerHeight / 2, zoom: 0.7 }}
       >
         <Panel position='top-left'><RestartCanvas resetGraph={resetGraph}></RestartCanvas></Panel>
-        <MiniMap />
+        <MiniMap maskColor={"rgb(236, 236, 236, 1)"} nodeColor={nodeColor}/>
         <Background className='bg-slate-100'  variant={BackgroundVariant.Dots} gap={25} />
       </ReactFlow>
   )

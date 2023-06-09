@@ -90,8 +90,8 @@ export const TextVideo = observer(() => {
         </div>
       </div>
     ) : (
-        <div className="mt-8 w-10/12 border-2 border-dashed border-gray-300 rounded-md flex items-center justify-center h-96">
-          <p className="text-gray-500 text-3xl">Coming Soon...</p>
+        <div className="mt-8 w-10/12 border-2 border-dashed border-black rounded-md flex items-center justify-center h-96">
+          <p className="text-black text-3xl">Coming Soon...</p>
         </div>
       )}
 
