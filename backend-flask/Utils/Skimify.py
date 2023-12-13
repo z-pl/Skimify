@@ -1,9 +1,9 @@
 from openai import OpenAI
-
-client = OpenAI(api_key=os.getenv("open_ai_api_key"))
 import os
 from Utils.GPTHelper import split_into_chunks, tokenize
 from dotenv import load_dotenv
+
+client = OpenAI(api_key=os.getenv("open_ai_api_key"))
 
 
 class SkimifyTool():
