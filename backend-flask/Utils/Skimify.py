@@ -42,7 +42,7 @@ class SkimifyTool():
 
         dotpoint_conversion = ""
 
-        completion = client.chat.completions.create(model="gpt-4-turbo",
+        completion = client.chat.completions.create(model="gpt-4o",
         messages=[
             {
                 "role": "user",
@@ -64,7 +64,7 @@ class SkimifyTool():
             return "@dp Please reduce input size and try again"
         
 
-        completion = client.chat.completions.create(model="gpt-4-turbo",
+        completion = client.chat.completions.create(model="gpt-4o",
         messages=[
             {
                 "role": "user",
